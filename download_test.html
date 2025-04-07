@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Descargar Archivo - Sistema DEPROS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, button {
+            padding: 8px;
+            margin-bottom: 16px;
+            width: 100%;
+            max-width: 500px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Descargar Archivo</h2>
+
+<label for="fileId">ID del Archivo:</label>
+<input type="text" id="fileId" placeholder="Ej: 123">
+
+<label for="token">Token JWT (Bearer):</label>
+<input type="text" id="token" placeholder="Pega tu token aquí">
+
+<button onclick="fetchFile()">Descargar Archivo</button>
+
+<h3>Información del Archivo</h3>
+<pre id="fileInfo">Esperando información...</pre>
+
+<script>
+async function fetchFile() {
+    const fileId = document.getElementById('fileId').value;
+    const token = document.getElementById('token').value;
+    const fileInfoEl = document.getElementById('fileInfo');
+
+    fileInfoEl.textContent = 'Descargando archivo...';
+
+    if (!fileId || !token) {
+        alert('Por favor ingresa el ID del archivo y el token.');
+        return;
+    }
+
+    const url = `https://sistema.depros.com.ar/get_file?file_id=${encodeURIComponent(fileId)}`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            fileInfoEl.textContent = 'Error: ' + errorText;
+            return;
+        }
+
+        const contentDisposition = response.headers.get('Content-Disposition');
+        const fileName = contentDisposition ? contentDisposition.split('filename="')[1].split('"')[0] : 'archivo_desconocido';
+        const blob = await response.blob();
+
+        const fileUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = fileUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        fileInfoEl.textContent = `Archivo "${fileName}" descargado correctamente.`;
+
+    } catch (error) {
+        fileInfoEl.textContent = 'Error al conectar: ' + error.message;
+    }
+}
+</script>
+
+</body>
+</html>
