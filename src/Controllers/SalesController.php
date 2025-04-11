@@ -61,12 +61,12 @@ class SalesController {
         $userId = $decoded->id;
         $salesModel = new Sales();
         $sale = $salesModel->findById($id);
-        if (!$sale || $sale['user_id'] != $userId) {
+    /*    if (!$sale || $sale['user_id'] != $userId) {
             $data = ['error' => 'Sale not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['sale' => $sale];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -161,12 +161,12 @@ class SalesController {
         $userId = $decoded->id;
         $salesModel = new Sales();
         $existingSale = $salesModel->findById($id);
-        if (!$existingSale || $existingSale['user_id'] != $userId) {
+    /*    if (!$existingSale || $existingSale['user_id'] != $userId) {
             $data = ['error' => 'Sale not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['client_id'], $body['product_service_id'], $body['invoice_number'], $body['amount'])) {
             $data = ['error' => 'Missing required fields: client_id, product_service_id, invoice_number, amount'];
@@ -231,12 +231,12 @@ class SalesController {
         $userId = $decoded->id;
         $salesModel = new Sales();
         $existingSale = $salesModel->findById($id);
-        if (!$existingSale || $existingSale['user_id'] != $userId) {
+   /*     if (!$existingSale || $existingSale['user_id'] != $userId) {
             $data = ['error' => 'Sale not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new SalesHistory();
         $history->insertHistory(
@@ -285,12 +285,12 @@ class SalesController {
         $userId = $decoded->id;
         $salesModel = new Sales();
         $sale = $salesModel->findById($id);
-        if (!$sale || $sale['user_id'] != $userId) {
+    /*    if (!$sale || $sale['user_id'] != $userId) {
             $data = ['error' => 'Sale not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new SalesHistory();
         $historyRecords = $history->listHistoryBySaleId($id);
         $data = ['history' => $historyRecords];

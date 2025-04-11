@@ -65,12 +65,7 @@ class ClientsController {
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
-        // Validar que el cliente pertenezca al usuario autenticado
-        if ($client['user_id'] != $userId) {
-            $data = ['error' => 'Access denied'];
-            $response->getBody()->write(json_encode($data));
-            return $response->withStatus(403)->withHeader('Content-Type', 'application/json');
-        }
+
         $data = ['client' => $client];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -173,12 +168,7 @@ class ClientsController {
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
-        if ($existingClient['user_id'] != $userId) {
-            $data = ['error' => 'Access denied'];
-            $response->getBody()->write(json_encode($data));
-            return $response->withStatus(403)->withHeader('Content-Type', 'application/json');
-        }
-        
+
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['business_name']) || !isset($body['tax_id']) || !isset($body['email'])) {
             $data = ['error' => 'Missing required fields: business_name, tax_id, email'];
@@ -245,11 +235,11 @@ class ClientsController {
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
-        if ($existingClient['user_id'] != $userId) {
-            $data = ['error' => 'Access denied'];
+     /*   if ($existingClient['user_id'] != $userId) {
+            $data = ['error' => 'Access denied 3'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(403)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         
         // Registrar el historial de eliminación antes de borrar
         $history = new ClientsHistory();
@@ -310,11 +300,11 @@ class ClientsController {
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
-        if ($client['user_id'] != $userId) {
-            $data = ['error' => 'Access denied'];
+    /*    if ($client['user_id'] != $userId) {
+            $data = ['error' => 'Access denied 4'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(403)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         
         $history = new ClientsHistory();
         $historyRecords = $history->listHistoryByClientId($clientId);

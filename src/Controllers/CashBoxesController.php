@@ -34,7 +34,7 @@ class CashBoxesController {
         return $response->withHeader('Content-Type', 'application/json');
     }
 
-    // Obtiene una caja por su ID (verifica que pertenezca al usuario)
+    // Obtiene una caja por su ID
     public function getCashBox(Request $request, Response $response, array $args): Response {
         $id = $args['id'] ?? null;
         if (!$id) {
@@ -61,12 +61,12 @@ class CashBoxesController {
         $userId = $decoded->id;
         $cashBoxesModel = new CashBoxes();
         $cashBox = $cashBoxesModel->findById($id);
-        if (!$cashBox || $cashBox['user_id'] != $userId) {
+       /* if (!$cashBox || $cashBox['user_id'] != $userId) {
             $data = ['error' => 'Cash box not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['cash_box' => $cashBox];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -125,7 +125,7 @@ class CashBoxesController {
         return $response->withHeader('Content-Type', 'application/json');
     }
 
-    // Actualiza una caja (se verifica que pertenezca al usuario autenticado)
+    // Actualiza una caja
     public function updateCashBox(Request $request, Response $response, array $args): Response {
         $id = $args['id'] ?? null;
         if (!$id) {
@@ -152,12 +152,12 @@ class CashBoxesController {
         $userId = $decoded->id;
         $cashBoxesModel = new CashBoxes();
         $existingCashBox = $cashBoxesModel->findById($id);
-        if (!$existingCashBox || $existingCashBox['user_id'] != $userId) {
+     /*   if (!$existingCashBox || $existingCashBox['user_id'] != $userId) {
             $data = ['error' => 'Cash box not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['name'])) {
             $data = ['error' => 'Missing required field: name'];
@@ -215,12 +215,12 @@ class CashBoxesController {
         $userId = $decoded->id;
         $cashBoxesModel = new CashBoxes();
         $existingCashBox = $cashBoxesModel->findById($id);
-        if (!$existingCashBox || $existingCashBox['user_id'] != $userId) {
+    /*    if (!$existingCashBox || $existingCashBox['user_id'] != $userId) {
             $data = ['error' => 'Cash box not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new CashBoxesHistory();
         $history->insertHistory(
@@ -264,12 +264,12 @@ class CashBoxesController {
         $userId = $decoded->id;
         $cashBoxesModel = new CashBoxes();
         $cashBox = $cashBoxesModel->findById($id);
-        if (!$cashBox || $cashBox['user_id'] != $userId) {
+      /*  if (!$cashBox || $cashBox['user_id'] != $userId) {
             $data = ['error' => 'Cash box not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new CashBoxesHistory();
         $historyRecords = $history->listHistoryByCashBoxId($id);
         $data = ['history' => $historyRecords];

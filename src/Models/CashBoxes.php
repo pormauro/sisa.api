@@ -38,13 +38,21 @@ class CashBoxes {
     }
     
     // Lista todas las cajas del usuario
-    public function listAllByUser($userId) {
+  /*  public function listAllByUser($userId) {
         $sql = "SELECT * FROM {$this->table} WHERE user_id = :user_id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }*/
+    
+    public function listAll() {
+        $sql = "SELECT * FROM {$this->table}";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     
     // Actualiza una caja
     public function update($id, array $data) {

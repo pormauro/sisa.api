@@ -56,11 +56,11 @@ class AccountingClosingsController {
         $userId = $decoded->id;
         $closingsModel = new AccountingClosings();
         $closing = $closingsModel->findById($id);
-        if(!$closing || $closing['user_id'] != $userId){
+    /**    if(!$closing || $closing['user_id'] != $userId){
             $data = ['error' => 'Closing not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['accounting_closing' => $closing];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -144,11 +144,11 @@ class AccountingClosingsController {
         $userId = $decoded->id;
         $closingsModel = new AccountingClosings();
         $existingClosing = $closingsModel->findById($id);
-        if(!$existingClosing || $existingClosing['user_id'] != $userId){
+     /*   if(!$existingClosing || $existingClosing['user_id'] != $userId){
             $data = ['error' => 'Closing not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['cash_box_id'], $body['closing_date'], $body['final_balance'], $body['total_income'], $body['total_expenses'])) {
             $data = ['error' => 'Missing required fields: cash_box_id, closing_date, final_balance, total_income, total_expenses'];
@@ -205,11 +205,11 @@ class AccountingClosingsController {
         $userId = $decoded->id;
         $closingsModel = new AccountingClosings();
         $existingClosing = $closingsModel->findById($id);
-        if(!$existingClosing || $existingClosing['user_id'] != $userId){
+    /*    if(!$existingClosing || $existingClosing['user_id'] != $userId){
             $data = ['error' => 'Closing not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new AccountingClosingsHistory();
         $history->insertHistory(
@@ -254,11 +254,11 @@ class AccountingClosingsController {
         $userId = $decoded->id;
         $closingsModel = new AccountingClosings();
         $closing = $closingsModel->findById($id);
-        if(!$closing || $closing['user_id'] != $userId){
+    /*    if(!$closing || $closing['user_id'] != $userId){
             $data = ['error' => 'Closing not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new AccountingClosingsHistory();
         $historyRecords = $history->listHistoryByClosingId($id);
         $data = ['history' => $historyRecords];

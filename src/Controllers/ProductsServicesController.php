@@ -56,11 +56,11 @@ class ProductsServicesController {
         $userId = $decoded->id;
         $psModel = new ProductsServices();
         $record = $psModel->findById($id);
-        if (!$record || $record['user_id'] != $userId) {
+     /*   if (!$record || $record['user_id'] != $userId) {
             $data = ['error' => 'Record not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['product_service' => $record];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -146,11 +146,11 @@ class ProductsServicesController {
         $userId = $decoded->id;
         $psModel = new ProductsServices();
         $existing = $psModel->findById($id);
-        if (!$existing || $existing['user_id'] != $userId) {
+     /*   if (!$existing || $existing['user_id'] != $userId) {
             $data = ['error' => 'Record not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         // if (!isset($body['description'], $body['category'], $body['price'], $body['cost'], $body['difficulty'], $body['item_type'], $body['stock'])) {
         //     $data = ['error' => 'Missing required fields: description, category, price, cost, difficulty, item_type, stock'];
@@ -209,11 +209,11 @@ class ProductsServicesController {
         $userId = $decoded->id;
         $psModel = new ProductsServices();
         $existing = $psModel->findById($id);
-        if (!$existing || $existing['user_id'] != $userId) {
+    /*    if (!$existing || $existing['user_id'] != $userId) {
             $data = ['error' => 'Record not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new ProductsServicesHistory();
         $history->insertHistory(
@@ -260,11 +260,11 @@ class ProductsServicesController {
         $userId = $decoded->id;
         $psModel = new ProductsServices();
         $record = $psModel->findById($id);
-        if (!$record || $record['user_id'] != $userId) {
+       /* if (!$record || $record['user_id'] != $userId) {
             $data = ['error' => 'Record not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new ProductsServicesHistory();
         $historyRecords = $history->listHistoryByProductServiceId($id);
         $data = ['history' => $historyRecords];

@@ -61,12 +61,12 @@ class ExpensesController {
         $userId = $decoded->id;
         $expensesModel = new Expenses();
         $expense = $expensesModel->findById($id);
-        if(!$expense || $expense['user_id'] != $userId){
+    /*    if(!$expense || $expense['user_id'] != $userId){
             $data = ['error' => 'Expense not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['expense' => $expense];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -161,12 +161,12 @@ class ExpensesController {
         $userId = $decoded->id;
         $expensesModel = new Expenses();
         $existingExpense = $expensesModel->findById($id);
-        if(!$existingExpense || $existingExpense['user_id'] != $userId){
+    /*    if(!$existingExpense || $existingExpense['user_id'] != $userId){
             $data = ['error' => 'Expense not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['description'], $body['category'], $body['amount'], $body['invoice_number'])) {
             $data = ['error' => 'Missing required fields: description, category, amount, invoice_number'];
@@ -231,12 +231,12 @@ class ExpensesController {
         $userId = $decoded->id;
         $expensesModel = new Expenses();
         $existingExpense = $expensesModel->findById($id);
-        if(!$existingExpense || $existingExpense['user_id'] != $userId){
+    /*    if(!$existingExpense || $existingExpense['user_id'] != $userId){
             $data = ['error' => 'Expense not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new ExpensesHistory();
         $history->insertHistory(
@@ -285,12 +285,12 @@ class ExpensesController {
         $userId = $decoded->id;
         $expensesModel = new Expenses();
         $expense = $expensesModel->findById($id);
-        if(!$expense || $expense['user_id'] != $userId){
+    /*    if(!$expense || $expense['user_id'] != $userId){
             $data = ['error' => 'Expense not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new ExpensesHistory();
         $historyRecords = $history->listHistoryByExpenseId($id);
         $data = ['history' => $historyRecords];

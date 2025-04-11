@@ -34,7 +34,7 @@ class JobsController {
         return $response->withHeader('Content-Type','application/json');
     }
 
-    // Obtiene un job por su ID (verifica que pertenezca al usuario)
+    // Obtiene un job por su ID
     public function getJob(Request $request, Response $response, array $args): Response {
         $id = $args['id'] ?? null;
         if(!$id){
@@ -61,12 +61,12 @@ class JobsController {
         $userId = $decoded->id;
         $jobsModel = new Jobs();
         $job = $jobsModel->findById($id);
-        if(!$job || $job['user_id'] != $userId){
+       /* if(!$job || $job['user_id'] != $userId){
             $data = ['error' => 'Job not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type','application/json');
-        }
+        }*/
         $data = ['job' => $job];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type','application/json');
@@ -167,12 +167,12 @@ class JobsController {
         $userId = $decoded->id;
         $jobsModel = new Jobs();
         $existingJob = $jobsModel->findById($id);
-        if(!$existingJob || $existingJob['user_id'] != $userId){
+     /*   if(!$existingJob || $existingJob['user_id'] != $userId){
             $data = ['error' => 'Job not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type','application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['client_id'], $body['type_of_work'], $body['description'], $body['status'])) {
             $data = ['error' => 'Missing required fields: client_id, type_of_work, description, status'];
@@ -244,12 +244,12 @@ class JobsController {
         $userId = $decoded->id;
         $jobsModel = new Jobs();
         $existingJob = $jobsModel->findById($id);
-        if(!$existingJob || $existingJob['user_id'] != $userId){
+      /*  if(!$existingJob || $existingJob['user_id'] != $userId){
             $data = ['error' => 'Job not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type','application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new JobsHistory();
         $history->insertHistory(
@@ -300,13 +300,13 @@ class JobsController {
         }
         $userId = $decoded->id;
         $jobsModel = new Jobs();
-        $job = $jobsModel->findById($id);
+      /*  $job = $jobsModel->findById($id);
         if(!$job || $job['user_id'] != $userId){
             $data = ['error' => 'Job not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type','application/json');
-        }
+        }*/
         $history = new JobsHistory();
         $historyRecords = $history->listHistoryByJobId($id);
         $data = ['history' => $historyRecords];

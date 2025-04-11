@@ -56,11 +56,11 @@ class AppointmentsController {
         $userId = $decoded->id;
         $appointmentsModel = new Appointments();
         $appointment = $appointmentsModel->findById($id);
-        if(!$appointment || $appointment['user_id'] != $userId){
+   /*     if(!$appointment || $appointment['user_id'] != $userId){
             $data = ['error' => 'Appointment not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type','application/json');
-        }
+        }*/
         $data = ['appointment' => $appointment];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type','application/json');
@@ -148,11 +148,11 @@ class AppointmentsController {
         $userId = $decoded->id;
         $appointmentsModel = new Appointments();
         $existingAppointment = $appointmentsModel->findById($id);
-        if(!$existingAppointment || $existingAppointment['user_id'] != $userId){
+     /*   if(!$existingAppointment || $existingAppointment['user_id'] != $userId){
             $data = ['error' => 'Appointment not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type','application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['client_id'], $body['appointment_date'], $body['appointment_time'], $body['location'])) {
             $data = ['error' => 'Missing required fields: client_id, appointment_date, appointment_time, location'];
@@ -212,11 +212,11 @@ class AppointmentsController {
         $userId = $decoded->id;
         $appointmentsModel = new Appointments();
         $existingAppointment = $appointmentsModel->findById($id);
-        if(!$existingAppointment || $existingAppointment['user_id'] != $userId){
+     /*   if(!$existingAppointment || $existingAppointment['user_id'] != $userId){
             $data = ['error' => 'Appointment not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type','application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new AppointmentsHistory();
         $history->insertHistory(
@@ -262,11 +262,11 @@ class AppointmentsController {
         $userId = $decoded->id;
         $appointmentsModel = new Appointments();
         $appointment = $appointmentsModel->findById($id);
-        if(!$appointment || $appointment['user_id'] != $userId){
+     /*   if(!$appointment || $appointment['user_id'] != $userId){
             $data = ['error' => 'Appointment not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type','application/json');
-        }
+        }*/
         $history = new AppointmentsHistory();
         $historyRecords = $history->listHistoryByAppointmentId($id);
         $data = ['history' => $historyRecords];
