@@ -1,4 +1,4 @@
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: .env
 Content:
 JWT_SECRET=mi_clave_secreta
@@ -24,7 +24,7 @@ SMTP_FROM_NAME="Sistema de GestiÃ³n DEPROS"
 TIME_ZONE=America/Argentina/Buenos_Aires
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: .htaccess
 Content:
 # Activar reescritura de URLs
@@ -54,7 +54,7 @@ Content:
 </IfModule>
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: activate.php
 Content:
 <?php
@@ -83,7 +83,7 @@ if ($result) {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: composer.json
 Content:
 {
@@ -109,7 +109,7 @@ Content:
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: composer.lock
 Content:
 {
@@ -1409,7 +1409,7 @@ Content:
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: debug.php
 Content:
 <?php
@@ -1441,7 +1441,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 exit;
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: download_test.html
 Content:
 <!DOCTYPE html>
@@ -1539,7 +1539,7 @@ async function fetchFile() {
 </html>
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: index.php
 Content:
 <?php
@@ -1574,7 +1574,7 @@ require_once __DIR__ . '/src/Routes/api.php';
 $app->run();
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: install.php
 Content:
     <?php
@@ -1654,6 +1654,29 @@ try {
     } else {
         echo "Table 'users' already exists. Verification completed.<br/>";
     }
+
+
+
+
+// -------------------------------
+// 20. Table: permissions
+// -------------------------------
+$createPermissionsSql = "CREATE TABLE IF NOT EXISTS permissions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT DEFAULT NULL,
+    sector VARCHAR(100) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX (user_id),
+    INDEX (sector)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+executeSQL($pdo, $createPermissionsSql, "Table 'permissions' created/verified.");
+
+
+
+
+
+
 
     // -------------------------------
     // 2. Table: files
@@ -2190,10 +2213,10 @@ executeSQL($pdo, $createAccountingClosingsHistorySql, "Table 'accounting_closing
 ?>
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: output.txt
 Content:
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: .env
 Content:
 JWT_SECRET=mi_clave_secreta
@@ -2219,7 +2242,7 @@ SMTP_FROM_NAME="Sistema de GestiÃƒÂ³n DEPROS"
 TIME_ZONE=America/Argentina/Buenos_Aires
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: .htaccess
 Content:
 # Activar reescritura de URLs
@@ -2249,7 +2272,7 @@ Content:
 </IfModule>
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: activate.php
 Content:
 <?php
@@ -2278,7 +2301,7 @@ if ($result) {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: composer.json
 Content:
 {
@@ -2304,7 +2327,7 @@ Content:
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: composer.lock
 Content:
 {
@@ -3604,7 +3627,7 @@ Content:
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: debug.php
 Content:
 <?php
@@ -3636,7 +3659,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 exit;
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: download_test.html
 Content:
 <!DOCTYPE html>
@@ -3734,7 +3757,7 @@ async function fetchFile() {
 </html>
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: index.php
 Content:
 <?php
@@ -3769,7 +3792,7 @@ require_once __DIR__ . '/src/Routes/api.php';
 $app->run();
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: install.php
 Content:
     <?php
@@ -3849,6 +3872,29 @@ try {
     } else {
         echo "Table 'users' already exists. Verification completed.<br/>";
     }
+
+
+
+
+// -------------------------------
+// 20. Table: permissions
+// -------------------------------
+$createPermissionsSql = "CREATE TABLE IF NOT EXISTS permissions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT DEFAULT NULL,
+    sector VARCHAR(100) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX (user_id),
+    INDEX (sector)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+executeSQL($pdo, $createPermissionsSql, "Table 'permissions' created/verified.");
+
+
+
+
+
+
 
     // -------------------------------
     // 2. Table: files
@@ -4385,7 +4431,7 @@ executeSQL($pdo, $createAccountingClosingsHistorySql, "Table 'accounting_closing
 ?>
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: reset_password_form.php
 Content:
 <?php
@@ -4526,7 +4572,7 @@ if (!$token) {
 </html>
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api
 File: uninstall.php
 Content:
 <?php
@@ -4587,6 +4633,7 @@ try {
         'notifications',
         'activity_log',
         'files',
+        'permissions',
         'users'
     ];
 
@@ -4606,7 +4653,7 @@ try {
 ?>
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Config
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Config
 File: Database.php
 Content:
 <?php
@@ -4646,7 +4693,7 @@ class Database
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: AccountingClosingsController.php
 Content:
 <?php
@@ -4707,11 +4754,11 @@ class AccountingClosingsController {
         $userId = $decoded->id;
         $closingsModel = new AccountingClosings();
         $closing = $closingsModel->findById($id);
-        if(!$closing || $closing['user_id'] != $userId){
+    /**    if(!$closing || $closing['user_id'] != $userId){
             $data = ['error' => 'Closing not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['accounting_closing' => $closing];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -4795,11 +4842,11 @@ class AccountingClosingsController {
         $userId = $decoded->id;
         $closingsModel = new AccountingClosings();
         $existingClosing = $closingsModel->findById($id);
-        if(!$existingClosing || $existingClosing['user_id'] != $userId){
+     /*   if(!$existingClosing || $existingClosing['user_id'] != $userId){
             $data = ['error' => 'Closing not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['cash_box_id'], $body['closing_date'], $body['final_balance'], $body['total_income'], $body['total_expenses'])) {
             $data = ['error' => 'Missing required fields: cash_box_id, closing_date, final_balance, total_income, total_expenses'];
@@ -4856,11 +4903,11 @@ class AccountingClosingsController {
         $userId = $decoded->id;
         $closingsModel = new AccountingClosings();
         $existingClosing = $closingsModel->findById($id);
-        if(!$existingClosing || $existingClosing['user_id'] != $userId){
+    /*    if(!$existingClosing || $existingClosing['user_id'] != $userId){
             $data = ['error' => 'Closing not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new AccountingClosingsHistory();
         $history->insertHistory(
@@ -4905,11 +4952,11 @@ class AccountingClosingsController {
         $userId = $decoded->id;
         $closingsModel = new AccountingClosings();
         $closing = $closingsModel->findById($id);
-        if(!$closing || $closing['user_id'] != $userId){
+    /*    if(!$closing || $closing['user_id'] != $userId){
             $data = ['error' => 'Closing not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new AccountingClosingsHistory();
         $historyRecords = $history->listHistoryByClosingId($id);
         $data = ['history' => $historyRecords];
@@ -4919,7 +4966,7 @@ class AccountingClosingsController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: AppointmentsController.php
 Content:
 <?php
@@ -4980,11 +5027,11 @@ class AppointmentsController {
         $userId = $decoded->id;
         $appointmentsModel = new Appointments();
         $appointment = $appointmentsModel->findById($id);
-        if(!$appointment || $appointment['user_id'] != $userId){
+   /*     if(!$appointment || $appointment['user_id'] != $userId){
             $data = ['error' => 'Appointment not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type','application/json');
-        }
+        }*/
         $data = ['appointment' => $appointment];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type','application/json');
@@ -5072,11 +5119,11 @@ class AppointmentsController {
         $userId = $decoded->id;
         $appointmentsModel = new Appointments();
         $existingAppointment = $appointmentsModel->findById($id);
-        if(!$existingAppointment || $existingAppointment['user_id'] != $userId){
+     /*   if(!$existingAppointment || $existingAppointment['user_id'] != $userId){
             $data = ['error' => 'Appointment not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type','application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['client_id'], $body['appointment_date'], $body['appointment_time'], $body['location'])) {
             $data = ['error' => 'Missing required fields: client_id, appointment_date, appointment_time, location'];
@@ -5136,11 +5183,11 @@ class AppointmentsController {
         $userId = $decoded->id;
         $appointmentsModel = new Appointments();
         $existingAppointment = $appointmentsModel->findById($id);
-        if(!$existingAppointment || $existingAppointment['user_id'] != $userId){
+     /*   if(!$existingAppointment || $existingAppointment['user_id'] != $userId){
             $data = ['error' => 'Appointment not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type','application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new AppointmentsHistory();
         $history->insertHistory(
@@ -5186,11 +5233,11 @@ class AppointmentsController {
         $userId = $decoded->id;
         $appointmentsModel = new Appointments();
         $appointment = $appointmentsModel->findById($id);
-        if(!$appointment || $appointment['user_id'] != $userId){
+     /*   if(!$appointment || $appointment['user_id'] != $userId){
             $data = ['error' => 'Appointment not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type','application/json');
-        }
+        }*/
         $history = new AppointmentsHistory();
         $historyRecords = $history->listHistoryByAppointmentId($id);
         $data = ['history' => $historyRecords];
@@ -5200,7 +5247,7 @@ class AppointmentsController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: AuthController.php
 Content:
 <?php
@@ -5418,7 +5465,7 @@ class AuthController
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: CashBoxesController.php
 Content:
 <?php
@@ -5457,7 +5504,7 @@ class CashBoxesController {
         return $response->withHeader('Content-Type', 'application/json');
     }
 
-    // Obtiene una caja por su ID (verifica que pertenezca al usuario)
+    // Obtiene una caja por su ID
     public function getCashBox(Request $request, Response $response, array $args): Response {
         $id = $args['id'] ?? null;
         if (!$id) {
@@ -5484,12 +5531,12 @@ class CashBoxesController {
         $userId = $decoded->id;
         $cashBoxesModel = new CashBoxes();
         $cashBox = $cashBoxesModel->findById($id);
-        if (!$cashBox || $cashBox['user_id'] != $userId) {
+       /* if (!$cashBox || $cashBox['user_id'] != $userId) {
             $data = ['error' => 'Cash box not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['cash_box' => $cashBox];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -5548,7 +5595,7 @@ class CashBoxesController {
         return $response->withHeader('Content-Type', 'application/json');
     }
 
-    // Actualiza una caja (se verifica que pertenezca al usuario autenticado)
+    // Actualiza una caja
     public function updateCashBox(Request $request, Response $response, array $args): Response {
         $id = $args['id'] ?? null;
         if (!$id) {
@@ -5575,12 +5622,12 @@ class CashBoxesController {
         $userId = $decoded->id;
         $cashBoxesModel = new CashBoxes();
         $existingCashBox = $cashBoxesModel->findById($id);
-        if (!$existingCashBox || $existingCashBox['user_id'] != $userId) {
+     /*   if (!$existingCashBox || $existingCashBox['user_id'] != $userId) {
             $data = ['error' => 'Cash box not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['name'])) {
             $data = ['error' => 'Missing required field: name'];
@@ -5638,12 +5685,12 @@ class CashBoxesController {
         $userId = $decoded->id;
         $cashBoxesModel = new CashBoxes();
         $existingCashBox = $cashBoxesModel->findById($id);
-        if (!$existingCashBox || $existingCashBox['user_id'] != $userId) {
+    /*    if (!$existingCashBox || $existingCashBox['user_id'] != $userId) {
             $data = ['error' => 'Cash box not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new CashBoxesHistory();
         $history->insertHistory(
@@ -5687,12 +5734,12 @@ class CashBoxesController {
         $userId = $decoded->id;
         $cashBoxesModel = new CashBoxes();
         $cashBox = $cashBoxesModel->findById($id);
-        if (!$cashBox || $cashBox['user_id'] != $userId) {
+      /*  if (!$cashBox || $cashBox['user_id'] != $userId) {
             $data = ['error' => 'Cash box not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new CashBoxesHistory();
         $historyRecords = $history->listHistoryByCashBoxId($id);
         $data = ['history' => $historyRecords];
@@ -5702,7 +5749,7 @@ class CashBoxesController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: ClientsController.php
 Content:
 <?php
@@ -5772,12 +5819,7 @@ class ClientsController {
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
-        // Validar que el cliente pertenezca al usuario autenticado
-        if ($client['user_id'] != $userId) {
-            $data = ['error' => 'Access denied'];
-            $response->getBody()->write(json_encode($data));
-            return $response->withStatus(403)->withHeader('Content-Type', 'application/json');
-        }
+
         $data = ['client' => $client];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -5880,12 +5922,7 @@ class ClientsController {
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
-        if ($existingClient['user_id'] != $userId) {
-            $data = ['error' => 'Access denied'];
-            $response->getBody()->write(json_encode($data));
-            return $response->withStatus(403)->withHeader('Content-Type', 'application/json');
-        }
-        
+
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['business_name']) || !isset($body['tax_id']) || !isset($body['email'])) {
             $data = ['error' => 'Missing required fields: business_name, tax_id, email'];
@@ -5952,11 +5989,11 @@ class ClientsController {
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
-        if ($existingClient['user_id'] != $userId) {
-            $data = ['error' => 'Access denied'];
+     /*   if ($existingClient['user_id'] != $userId) {
+            $data = ['error' => 'Access denied 3'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(403)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         
         // Registrar el historial de eliminaciÃ³n antes de borrar
         $history = new ClientsHistory();
@@ -6017,11 +6054,11 @@ class ClientsController {
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
-        if ($client['user_id'] != $userId) {
-            $data = ['error' => 'Access denied'];
+    /*    if ($client['user_id'] != $userId) {
+            $data = ['error' => 'Access denied 4'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(403)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         
         $history = new ClientsHistory();
         $historyRecords = $history->listHistoryByClientId($clientId);
@@ -6036,7 +6073,7 @@ class ClientsController {
 
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: ExpensesController.php
 Content:
 <?php
@@ -6102,12 +6139,12 @@ class ExpensesController {
         $userId = $decoded->id;
         $expensesModel = new Expenses();
         $expense = $expensesModel->findById($id);
-        if(!$expense || $expense['user_id'] != $userId){
+    /*    if(!$expense || $expense['user_id'] != $userId){
             $data = ['error' => 'Expense not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['expense' => $expense];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -6202,12 +6239,12 @@ class ExpensesController {
         $userId = $decoded->id;
         $expensesModel = new Expenses();
         $existingExpense = $expensesModel->findById($id);
-        if(!$existingExpense || $existingExpense['user_id'] != $userId){
+    /*    if(!$existingExpense || $existingExpense['user_id'] != $userId){
             $data = ['error' => 'Expense not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['description'], $body['category'], $body['amount'], $body['invoice_number'])) {
             $data = ['error' => 'Missing required fields: description, category, amount, invoice_number'];
@@ -6272,12 +6309,12 @@ class ExpensesController {
         $userId = $decoded->id;
         $expensesModel = new Expenses();
         $existingExpense = $expensesModel->findById($id);
-        if(!$existingExpense || $existingExpense['user_id'] != $userId){
+    /*    if(!$existingExpense || $existingExpense['user_id'] != $userId){
             $data = ['error' => 'Expense not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new ExpensesHistory();
         $history->insertHistory(
@@ -6326,12 +6363,12 @@ class ExpensesController {
         $userId = $decoded->id;
         $expensesModel = new Expenses();
         $expense = $expensesModel->findById($id);
-        if(!$expense || $expense['user_id'] != $userId){
+    /*    if(!$expense || $expense['user_id'] != $userId){
             $data = ['error' => 'Expense not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new ExpensesHistory();
         $historyRecords = $history->listHistoryByExpenseId($id);
         $data = ['history' => $historyRecords];
@@ -6341,7 +6378,7 @@ class ExpensesController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: FileController.php
 Content:
 <?php
@@ -6474,7 +6511,7 @@ class FileController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: FoldersController.php
 Content:
 <?php
@@ -6549,11 +6586,11 @@ class FoldersController {
         $userId = $decoded->id;
         $foldersModel = new Folders();
         $folder = $foldersModel->findById($folderId);
-        if (!$folder || $folder['user_id'] != $userId) {
+    /*    if (!$folder || $folder['user_id'] != $userId) {
             $data = ['error' => 'Folder not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['folder' => $folder];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -6631,11 +6668,11 @@ class FoldersController {
         $userId = $decoded->id;
         $foldersModel = new Folders();
         $existingFolder = $foldersModel->findById($folderId);
-        if (!$existingFolder || $existingFolder['user_id'] != $userId) {
+       /* if (!$existingFolder || $existingFolder['user_id'] != $userId) {
             $data = ['error' => 'Folder not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['name'])) {
             $data = ['error' => 'Missing required field: name'];
@@ -6685,11 +6722,11 @@ class FoldersController {
         $userId = $decoded->id;
         $foldersModel = new Folders();
         $existingFolder = $foldersModel->findById($folderId);
-        if (!$existingFolder || $existingFolder['user_id'] != $userId) {
+      /*  if (!$existingFolder || $existingFolder['user_id'] != $userId) {
             $data = ['error' => 'Folder not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new FoldersHistory();
         $history->insertHistory(
@@ -6732,11 +6769,11 @@ class FoldersController {
         }
         $foldersModel = new Folders();
         $folder = $foldersModel->findById($folderId);
-        if (!$folder || $folder['user_id'] != $decoded->id) {
+    /*    if (!$folder || $folder['user_id'] != $decoded->id) {
             $data = ['error' => 'Folder not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new FoldersHistory();
         $historyRecords = $history->listHistoryByFolderId($folderId);
         $data = ['history' => $historyRecords];
@@ -6771,7 +6808,7 @@ class FoldersController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: JobsController.php
 Content:
 <?php
@@ -6810,7 +6847,7 @@ class JobsController {
         return $response->withHeader('Content-Type','application/json');
     }
 
-    // Obtiene un job por su ID (verifica que pertenezca al usuario)
+    // Obtiene un job por su ID
     public function getJob(Request $request, Response $response, array $args): Response {
         $id = $args['id'] ?? null;
         if(!$id){
@@ -6837,12 +6874,12 @@ class JobsController {
         $userId = $decoded->id;
         $jobsModel = new Jobs();
         $job = $jobsModel->findById($id);
-        if(!$job || $job['user_id'] != $userId){
+       /* if(!$job || $job['user_id'] != $userId){
             $data = ['error' => 'Job not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type','application/json');
-        }
+        }*/
         $data = ['job' => $job];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type','application/json');
@@ -6943,12 +6980,12 @@ class JobsController {
         $userId = $decoded->id;
         $jobsModel = new Jobs();
         $existingJob = $jobsModel->findById($id);
-        if(!$existingJob || $existingJob['user_id'] != $userId){
+     /*   if(!$existingJob || $existingJob['user_id'] != $userId){
             $data = ['error' => 'Job not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type','application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['client_id'], $body['type_of_work'], $body['description'], $body['status'])) {
             $data = ['error' => 'Missing required fields: client_id, type_of_work, description, status'];
@@ -7020,12 +7057,12 @@ class JobsController {
         $userId = $decoded->id;
         $jobsModel = new Jobs();
         $existingJob = $jobsModel->findById($id);
-        if(!$existingJob || $existingJob['user_id'] != $userId){
+      /*  if(!$existingJob || $existingJob['user_id'] != $userId){
             $data = ['error' => 'Job not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type','application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new JobsHistory();
         $history->insertHistory(
@@ -7076,13 +7113,13 @@ class JobsController {
         }
         $userId = $decoded->id;
         $jobsModel = new Jobs();
-        $job = $jobsModel->findById($id);
+      /*  $job = $jobsModel->findById($id);
         if(!$job || $job['user_id'] != $userId){
             $data = ['error' => 'Job not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type','application/json');
-        }
+        }*/
         $history = new JobsHistory();
         $historyRecords = $history->listHistoryByJobId($id);
         $data = ['history' => $historyRecords];
@@ -7092,7 +7129,111 @@ class JobsController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
+File: PermissionsController.php
+Content:
+<?php
+namespace App\Controllers;
+
+use App\Models\Permission;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+
+class PermissionsController {
+
+    // MÃ©todo para listar solo los permisos globales
+    public function listGlobalPermissions(Request $request, Response $response, array $args): Response {
+        $permissionModel = new Permission();
+        $permissions = $permissionModel->listGlobal();
+        $result = ['permissions' => $permissions];
+        $response->getBody()->write(json_encode($result));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    // MÃ©todo para listar todos los permisos
+    public function listPermissions(Request $request, Response $response, array $args): Response {
+        $permissionModel = new Permission();
+        $permissions = $permissionModel->listAll();
+        $result = ['permissions' => $permissions];
+        $response->getBody()->write(json_encode($result));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    // MÃ©todo para listar permisos filtrados por usuario (pasando el user_id por la URL)
+    public function listPermissionsByUser(Request $request, Response $response, array $args): Response {
+        $userId = $args['user_id'] ?? null;
+        if (!$userId) {
+            $result = ['error' => 'Falta el parÃ¡metro user_id'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+        $permissionModel = new Permission();
+        $permissions = $permissionModel->listByUser($userId);
+        $result = ['permissions' => $permissions];
+        $response->getBody()->write(json_encode($result));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+    
+    // MÃ©todo para agregar un permiso (ya existente)
+    public function addPermission(Request $request, Response $response, array $args): Response {
+        $data = json_decode($request->getBody()->getContents(), true);
+        
+        if (!isset($data['sector'])) {
+            $result = ['error' => 'El campo sector es obligatorio'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+        
+        $permissionModel = new Permission();
+    
+        // Se valida tanto para usuarios especÃ­ficos como para permisos globales (user_id null)
+        // Para evitar duplicados, se verifica si ya existe el permiso
+        // Nota: user_id puede venir como null o nÃºmero
+        $userId = $data['user_id'] ?? null;
+        if ($permissionModel->exists($userId, $data['sector'])) {
+            $result = ['error' => 'El permiso ya existe para este usuario'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+        
+        $insertId = $permissionModel->create($data);
+        if ($insertId) {
+            $result = ['message' => 'Permiso creado exitosamente', 'permission_id' => $insertId];
+            $response->getBody()->write(json_encode($result));
+            return $response->withHeader('Content-Type', 'application/json');
+        } else {
+            $result = ['error' => 'Error al crear el permiso'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+        }
+    }
+
+
+
+    // MÃ©todo para eliminar un permiso
+    public function deletePermission(Request $request, Response $response, array $args): Response {
+        $id = $args['id'] ?? null;
+        if (!$id) {
+            $result = ['error' => 'Falta el ID del permiso'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+        $permissionModel = new Permission();
+        $deleted = $permissionModel->delete($id);
+        if ($deleted) {
+            $result = ['message' => 'Permiso eliminado exitosamente'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withHeader('Content-Type', 'application/json');
+        } else {
+            $result = ['error' => 'Error al eliminar el permiso'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+        }
+    }
+}
+
+---
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: ProductsServicesController.php
 Content:
 <?php
@@ -7153,11 +7294,11 @@ class ProductsServicesController {
         $userId = $decoded->id;
         $psModel = new ProductsServices();
         $record = $psModel->findById($id);
-        if (!$record || $record['user_id'] != $userId) {
+     /*   if (!$record || $record['user_id'] != $userId) {
             $data = ['error' => 'Record not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['product_service' => $record];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -7243,11 +7384,11 @@ class ProductsServicesController {
         $userId = $decoded->id;
         $psModel = new ProductsServices();
         $existing = $psModel->findById($id);
-        if (!$existing || $existing['user_id'] != $userId) {
+     /*   if (!$existing || $existing['user_id'] != $userId) {
             $data = ['error' => 'Record not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         // if (!isset($body['description'], $body['category'], $body['price'], $body['cost'], $body['difficulty'], $body['item_type'], $body['stock'])) {
         //     $data = ['error' => 'Missing required fields: description, category, price, cost, difficulty, item_type, stock'];
@@ -7306,11 +7447,11 @@ class ProductsServicesController {
         $userId = $decoded->id;
         $psModel = new ProductsServices();
         $existing = $psModel->findById($id);
-        if (!$existing || $existing['user_id'] != $userId) {
+    /*    if (!$existing || $existing['user_id'] != $userId) {
             $data = ['error' => 'Record not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new ProductsServicesHistory();
         $history->insertHistory(
@@ -7357,11 +7498,11 @@ class ProductsServicesController {
         $userId = $decoded->id;
         $psModel = new ProductsServices();
         $record = $psModel->findById($id);
-        if (!$record || $record['user_id'] != $userId) {
+       /* if (!$record || $record['user_id'] != $userId) {
             $data = ['error' => 'Record not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new ProductsServicesHistory();
         $historyRecords = $history->listHistoryByProductServiceId($id);
         $data = ['history' => $historyRecords];
@@ -7371,7 +7512,7 @@ class ProductsServicesController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: ProfileController.php
 Content:
 <?php
@@ -7416,7 +7557,55 @@ class ProfileController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
+File: ProfilesListController.php
+Content:
+<?php
+namespace App\Controllers;
+
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Helpers\JwtHelper;
+use App\Models\User;
+
+class ProfilesListController {
+    public function listAllProfiles(Request $request, Response $response, array $args): Response {
+        // Limpiar el buffer de salida para evitar contenido previo
+        if (ob_get_contents()) {
+            ob_clean();
+        }
+
+        // Obtener el token, si se envÃ­a, y decodificarlo para obtener el ID del usuario actual
+        $auth = $request->getHeaderLine('Authorization');
+        $currentUserId = null;
+        if ($auth) {
+            $token = str_replace('Bearer ', '', $auth);
+            $decoded = JwtHelper::verifyToken($token);
+            if ($decoded && isset($decoded->id)) {
+                $currentUserId = $decoded->id;
+            }
+        }
+
+        // Instanciar el modelo y obtener los perfiles
+        $userModel = new User();
+        $profiles = $userModel->getAllProfiles();
+
+        // Filtrar para que no se incluya el perfil del usuario actual
+        if ($currentUserId !== null) {
+            $profiles = array_filter($profiles, function($profile) use ($currentUserId) {
+                return $profile['id'] != $currentUserId;
+            });
+        }
+
+        // Reindexar el array para devolver una lista limpia
+        $data = ['profiles' => array_values($profiles)];
+        $response->getBody()->write(json_encode($data));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+}
+
+---
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: SalesController.php
 Content:
 <?php
@@ -7482,12 +7671,12 @@ class SalesController {
         $userId = $decoded->id;
         $salesModel = new Sales();
         $sale = $salesModel->findById($id);
-        if (!$sale || $sale['user_id'] != $userId) {
+    /*    if (!$sale || $sale['user_id'] != $userId) {
             $data = ['error' => 'Sale not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $data = ['sale' => $sale];
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
@@ -7582,12 +7771,12 @@ class SalesController {
         $userId = $decoded->id;
         $salesModel = new Sales();
         $existingSale = $salesModel->findById($id);
-        if (!$existingSale || $existingSale['user_id'] != $userId) {
+    /*    if (!$existingSale || $existingSale['user_id'] != $userId) {
             $data = ['error' => 'Sale not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $body = json_decode($request->getBody()->getContents(), true);
         if (!isset($body['client_id'], $body['product_service_id'], $body['invoice_number'], $body['amount'])) {
             $data = ['error' => 'Missing required fields: client_id, product_service_id, invoice_number, amount'];
@@ -7652,12 +7841,12 @@ class SalesController {
         $userId = $decoded->id;
         $salesModel = new Sales();
         $existingSale = $salesModel->findById($id);
-        if (!$existingSale || $existingSale['user_id'] != $userId) {
+   /*     if (!$existingSale || $existingSale['user_id'] != $userId) {
             $data = ['error' => 'Sale not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         // Registrar historial de DELETION antes de eliminar
         $history = new SalesHistory();
         $history->insertHistory(
@@ -7706,12 +7895,12 @@ class SalesController {
         $userId = $decoded->id;
         $salesModel = new Sales();
         $sale = $salesModel->findById($id);
-        if (!$sale || $sale['user_id'] != $userId) {
+    /*    if (!$sale || $sale['user_id'] != $userId) {
             $data = ['error' => 'Sale not found or access denied'];
             $response->getBody()->write(json_encode($data));
             return $response->withStatus(404)
                             ->withHeader('Content-Type', 'application/json');
-        }
+        }*/
         $history = new SalesHistory();
         $historyRecords = $history->listHistoryBySaleId($id);
         $data = ['history' => $historyRecords];
@@ -7721,7 +7910,7 @@ class SalesController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: UserConfigurationsController.php
 Content:
 <?php
@@ -7734,6 +7923,35 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class UserConfigurationsController {
+    
+    public function myConfigurations(Request $request, Response $response, array $args): Response {
+        // Validar token
+        $authHeader = $request->getHeaderLine('Authorization');
+        $token = str_replace('Bearer ', '', $authHeader);
+        $decoded = JwtHelper::verifyToken($token);
+        if (!$decoded) {
+            $result = ['error' => 'Token invÃ¡lido o expirado'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(401)
+                            ->withHeader('Content-Type', 'application/json');
+        }
+        
+        // Obtiene la configuraciÃ³n del usuario autenticado
+        $userId = $decoded->id;
+        $configModel = new UserConfigurations();
+        $configuration = $configModel->findByUserId($userId);
+        
+        if (!$configuration) {
+            $result = ['error' => 'ConfiguraciÃ³n no encontrada'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(404)
+                            ->withHeader('Content-Type', 'application/json');
+        }
+        
+        $response->getBody()->write(json_encode(['configuration' => $configuration]));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
 
     // GET /user_configurations -> Lista todas las configuraciones (sin restricciÃ³n)
     public function listConfigurations(Request $request, Response $response, array $args): Response {
@@ -7931,7 +8149,7 @@ class UserConfigurationsController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Controllers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Controllers
 File: UserProfileController.php
 Content:
 <?php
@@ -7944,6 +8162,34 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class UserProfileController {
+    
+    public function myProfile(Request $request, Response $response, array $args): Response {
+        // Validar token
+        $authHeader = $request->getHeaderLine('Authorization');
+        $token = str_replace('Bearer ', '', $authHeader);
+        $decoded = JwtHelper::verifyToken($token);
+        if (!$decoded) {
+            $result = ['error' => 'Token invÃ¡lido o expirado'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(401)
+                            ->withHeader('Content-Type', 'application/json');
+        }
+        
+        // Obtiene el perfil del usuario autenticado
+        $userId = $decoded->id;
+        $profileModel = new UserProfile();
+        $profile = $profileModel->findByUserId($userId);
+        
+        if (!$profile) {
+            $result = ['error' => 'Perfil no encontrado'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(404)
+                            ->withHeader('Content-Type', 'application/json');
+        }
+        
+        $response->getBody()->write(json_encode(['profile' => $profile]));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 
     // GET /user_profile -> Lista todos los perfiles (sin restricciÃ³n)
     public function listProfiles(Request $request, Response $response, array $args): Response {
@@ -8144,7 +8390,7 @@ class UserProfileController {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Helpers
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Helpers
 File: JwtHelper.php
 Content:
 <?php
@@ -8182,7 +8428,7 @@ class JwtHelper
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: AccountingClosingsHistory.php
 Content:
 <?php
@@ -8245,7 +8491,7 @@ class AccountingClosingsHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: AppointmentsHistory.php
 Content:
 <?php
@@ -8312,7 +8558,7 @@ class AppointmentsHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: CashBoxesHistory.php
 Content:
 <?php
@@ -8366,7 +8612,7 @@ class CashBoxesHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: ClientsHistory.php
 Content:
 <?php
@@ -8421,7 +8667,7 @@ class ClientsHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: ExpensesHistory.php
 Content:
 <?php
@@ -8487,7 +8733,7 @@ class ExpensesHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: FoldersHistory.php
 Content:
 <?php
@@ -8545,7 +8791,7 @@ class FoldersHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: JobsHistory.php
 Content:
 <?php
@@ -8617,7 +8863,7 @@ class JobsHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: ProductsServicesHistory.php
 Content:
 <?php
@@ -8684,7 +8930,7 @@ class ProductsServicesHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: SalesHistory.php
 Content:
 <?php
@@ -8750,7 +8996,7 @@ class SalesHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: UserConfigurationsHistory.php
 Content:
 <?php
@@ -8800,7 +9046,7 @@ class UserConfigurationsHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\History
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: UserProfileHistory.php
 Content:
 <?php
@@ -8852,7 +9098,7 @@ class UserProfileHistory {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Mail
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Mail
 File: EmailSender.php
 Content:
 <?php
@@ -8893,7 +9139,7 @@ class EmailSender {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Mail\Templates
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Mail\Templates
 File: ActivationEmail.php
 Content:
 <?php
@@ -8926,7 +9172,7 @@ class ActivationEmail {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Mail\Templates
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Mail\Templates
 File: ResetPasswordEmail.php
 Content:
 <?php
@@ -8960,7 +9206,7 @@ class ResetPasswordEmail {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Middleware
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Middleware
 File: ActivityLogMiddleware.php
 Content:
 <?php
@@ -9020,7 +9266,7 @@ class ActivityLogMiddleware
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Middleware
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Middleware
 File: AuthMiddleware.php
 Content:
 <?php
@@ -9120,7 +9366,7 @@ class AuthMiddleware
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Middleware
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Middleware
 File: CheckUserBlockedMiddleware.php
 Content:
 <?php
@@ -9201,7 +9447,61 @@ class CheckUserBlockedMiddleware
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Middleware
+File: PermissionsMiddleware.php
+Content:
+<?php
+namespace App\Middleware;
+
+use App\Models\Permission;
+use App\Helpers\JwtHelper;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Psr7\Factory\ResponseFactory;
+
+class PermissionsMiddleware {
+    private $requiredPermission;
+
+    public function __construct(string $requiredPermission) {
+        $this->requiredPermission = $requiredPermission;
+    }
+
+    public function __invoke(Request $request, RequestHandlerInterface $handler): ResponseInterface {
+        $responseFactory = new ResponseFactory();
+
+        // Obtener token de Authorization
+        $authHeader = $request->getHeaderLine('Authorization');
+        if (!$authHeader) {
+            return $this->jsonResponse($responseFactory->createResponse(), 'Falta header Authorization', 401);
+        }
+        $token = str_replace('Bearer ', '', $authHeader);
+        $decoded = JwtHelper::verifyToken($token);
+        if (!$decoded) {
+            return $this->jsonResponse($responseFactory->createResponse(), 'Token invÃ¡lido o expirado', 401);
+        }
+        // Si el usuario es superadmin (id=1), permitir sin restricciones
+        if (isset($decoded->id) && $decoded->id == 1) {
+            return $handler->handle($request);
+        }
+
+        // Verificar permiso en la base de datos
+        $permissionModel = new Permission();
+        if ($permissionModel->hasPermission($decoded->id, $this->requiredPermission)) {
+            return $handler->handle($request);
+        } else {
+            return $this->jsonResponse($responseFactory->createResponse(), 'Acceso denegado: permiso insuficiente', 403);
+        }
+    }
+
+    private function jsonResponse(ResponseInterface $response, string $message, int $statusCode): ResponseInterface {
+        $response->getBody()->write(json_encode(['error' => $message], JSON_UNESCAPED_UNICODE));
+        return $response->withStatus($statusCode)->withHeader('Content-Type', 'application/json');
+    }
+}
+
+---
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: AccountingClosings.php
 Content:
 <?php
@@ -9290,7 +9590,7 @@ class AccountingClosings {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: ActivityLog.php
 Content:
 <?php
@@ -9339,7 +9639,7 @@ class ActivityLog
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: Appointments.php
 Content:
 <?php
@@ -9435,7 +9735,7 @@ class Appointments {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: CashBoxes.php
 Content:
 <?php
@@ -9478,13 +9778,21 @@ class CashBoxes {
     }
     
     // Lista todas las cajas del usuario
-    public function listAllByUser($userId) {
+  /*  public function listAllByUser($userId) {
         $sql = "SELECT * FROM {$this->table} WHERE user_id = :user_id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }*/
+    
+    public function listAll() {
+        $sql = "SELECT * FROM {$this->table}";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     
     // Actualiza una caja
     public function update($id, array $data) {
@@ -9508,7 +9816,7 @@ class CashBoxes {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: Clients.php
 Content:
 <?php
@@ -9595,7 +9903,7 @@ class Clients {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: Expenses.php
 Content:
 <?php
@@ -9692,7 +10000,7 @@ class Expenses {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: File.php
 Content:
 <?php
@@ -9747,7 +10055,7 @@ class File {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: Folders.php
 Content:
 <?php
@@ -9846,7 +10154,7 @@ class Folders {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: Jobs.php
 Content:
 <?php
@@ -9955,7 +10263,110 @@ class Jobs {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
+File: Permission.php
+Content:
+<?php
+namespace App\Models;
+
+use App\Config\Database;
+use PDO;
+
+class Permission {
+    private $conn;
+    private $table = 'permissions';
+
+    public function __construct() {
+        $db = new Database();
+        $this->conn = $db->connect();
+    }
+
+    // Lista solo los permisos globales (user_id IS NULL)
+    public function listGlobal() {
+        $sql = "SELECT * FROM {$this->table} WHERE user_id IS NULL ORDER BY created_at DESC";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Lista todos los permisos
+    public function listAll() {
+        $sql = "SELECT * FROM {$this->table} ORDER BY created_at DESC";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // Lista los permisos para un usuario especÃ­fico (incluyendo los permisos globales: user_id IS NULL)
+    public function listByUser($userId) {
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE user_id = :user_id
+                ORDER BY created_at DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Inserta un nuevo permiso
+    public function create(array $data) {
+        // Verificar si ya existe el permiso para ese usuario y sector
+        $userId = isset($data['user_id']) ? $data['user_id'] : null;
+        if ($this->exists($userId, $data['sector'])) {
+            // Si ya existe, no se inserta y se retorna false.
+            return false;
+        }
+        
+        $sql = "INSERT INTO {$this->table} (user_id, sector)
+                VALUES (:user_id, :sector)";
+        $stmt = $this->conn->prepare($sql);
+        // Si user_id es null, se enlaza correctamente con PDO::PARAM_NULL
+        if ($userId === null) {
+            $stmt->bindValue(':user_id', null, \PDO::PARAM_NULL);
+        } else {
+            $stmt->bindValue(':user_id', $userId, \PDO::PARAM_INT);
+        }
+        $stmt->bindParam(':sector', $data['sector']);
+        if ($stmt->execute()){
+            return $this->conn->lastInsertId();
+        }
+        return false;
+    }
+
+
+    // Consulta si existe un permiso para un sector y un usuario (o para todos)
+    public function hasPermission($userId, $sector) {
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE sector = :sector AND (user_id = :user_id OR user_id IS NULL) 
+                LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':sector', $sector);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+    }
+
+    // MÃ©todo para eliminar un permiso
+    public function delete($id) {
+        $sql = "DELETE FROM {$this->table} WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+    public function exists($userId, $sector) {
+        $sql = "SELECT COUNT(*) FROM {$this->table} 
+                WHERE sector = :sector AND ((user_id = :user_id) OR (user_id IS NULL AND :user_id IS NULL))";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':sector', $sector);
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+
+
+
+}
+
+---
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: ProductsServices.php
 Content:
 <?php
@@ -10049,7 +10460,7 @@ class ProductsServices {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: Sales.php
 Content:
 <?php
@@ -10146,7 +10557,7 @@ class Sales {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: User.php
 Content:
 <?php
@@ -10289,10 +10700,20 @@ class User
         $stmt->bindParam(':id', $userId);
         return $stmt->execute();
     }
+    
+    // Obtener todos los perfiles (usuarios)
+    public function getAllProfiles()
+    {
+        $sql = "SELECT id, username, email, activated FROM {$this->table} ORDER BY username ASC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: UserConfigurations.php
 Content:
 <?php
@@ -10379,7 +10800,7 @@ class UserConfigurations {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Models
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Models
 File: UserProfile.php
 Content:
 <?php
@@ -10471,7 +10892,7 @@ class UserProfile {
 }
 
 ---
-Folder: C:/Users/Mauri/Documents/GitHub/sisa.api\src\Routes
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\Routes
 File: api.php
 Content:
 <?php
@@ -10480,16 +10901,16 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use App\Middleware\CheckUserBlockedMiddleware;
+use App\Middleware\PermissionsMiddleware;
+use App\Controllers\PermissionsController;
 use App\Controllers\FileController;
 use App\Controllers\ProfileController;
 use App\Controllers\AuthController;
 use App\Controllers\FoldersController;
 
-
-
 $authController = new AuthController();
 
-// Ruta para registrar un usuario
+// Rutas pÃºblicas
 $app->post('/register', function (Request $request, Response $response, $args) use ($authController) {
     $data = json_decode($request->getBody()->getContents(), true);
     $result = $authController->register($data);
@@ -10497,7 +10918,6 @@ $app->post('/register', function (Request $request, Response $response, $args) u
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Ruta para iniciar sesiÃ³n
 $app->post('/login', function (Request $request, Response $response, $args) use ($authController) {
     $data = json_decode($request->getBody()->getContents(), true);
     $result = $authController->login($data);
@@ -10505,7 +10925,6 @@ $app->post('/login', function (Request $request, Response $response, $args) use 
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Ruta para solicitar el cambio de contraseÃ±a
 $app->post('/forgot_password', function (Request $request, Response $response, $args) use ($authController) {
     $data = json_decode($request->getBody()->getContents(), true);
     $result = $authController->forgotPassword($data);
@@ -10513,7 +10932,6 @@ $app->post('/forgot_password', function (Request $request, Response $response, $
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Ruta para reiniciar la contraseÃ±a
 $app->post('/reset_password', function (Request $request, Response $response, $args) use ($authController) {
     if (!$request->hasHeader('Authorization')) {
         $data = ['error' => 'Falta header Authorization'];
@@ -10539,218 +10957,302 @@ $app->post('/reset_password', function (Request $request, Response $response, $a
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Ruta para obtener el perfil del usuario (protegida)
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+
+// Perfil del usuario (permiso: 'getProfile')
 $app->get('/profile', function (Request $request, Response $response, $args) {
     $controller = new ProfileController();
     return $controller->getProfile($request, $response, $args);
-})->add(new CheckUserBlockedMiddleware());
+})
+   // ->add(new PermissionsMiddleware('getProfile'))
+    ->add(new CheckUserBlockedMiddleware());
 
-// Ruta para subir archivos (protegida)
+// Subir archivos (permiso: 'uploadFile')
 $app->post('/upload', function (Request $request, Response $response, $args) {
     $controller = new FileController();
     return $controller->upload($request, $response, $args);
-})->add(new CheckUserBlockedMiddleware());
+})
+   // ->add(new PermissionsMiddleware('uploadFile'))
+    ->add(new CheckUserBlockedMiddleware());
 
-// Ruta para descargar archivos (protegida)
+// Descargar archivos (permiso: 'downloadFile')
 $app->get('/get_file', function (Request $request, Response $response, $args) {
     $controller = new FileController();
     return $controller->download($request, $response, $args);
-})->add(new CheckUserBlockedMiddleware());
-
+})
+    //->add(new PermissionsMiddleware('downloadFile'))
+    ->add(new CheckUserBlockedMiddleware());
 
 $app->get('/', function (Request $req, Response $res) {
     $res->getBody()->write(json_encode(['message' => 'Bienvenido a la API']));
     return $res->withHeader('Content-Type', 'application/json');
 });
 
+//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------Super administrador user_id=1-----------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
 
+// Ruta para listar solo los permisos globales (user_id = NULL)
+$app->get('/permissions/global', [PermissionsController::class, 'listGlobalPermissions'])
+    ->add(new PermissionsMiddleware('listGlobalPermissions'))
+    ->add(new CheckUserBlockedMiddleware());
 
-
-
-
-
-
-
-
+// Ruta para listar permisos filtrados por un usuario especÃ­fico
+$app->get('/permissions/user/{user_id}', [PermissionsController::class, 'listPermissionsByUser'])
+    ->add(new PermissionsMiddleware('listPermissionsByUser'))
+    ->add(new CheckUserBlockedMiddleware());
+    
+// Ruta para listar todos los permisos
+$app->get('/permissions', [PermissionsController::class, 'listPermissions'])
+    ->add(new PermissionsMiddleware('listPermissions'))
+    ->add(new CheckUserBlockedMiddleware());
+    
+// Ruta para agregar permisos a los usuarios (protecciÃ³n: permiso 'addPermission')
+$app->post('/permissions', [PermissionsController::class, 'addPermission'])
+    ->add(new PermissionsMiddleware('addPermission'))
+    ->add(new CheckUserBlockedMiddleware());
+    
+// Ruta para eliminar un permiso (por ID)
+$app->delete('/permissions/{id}', [PermissionsController::class, 'deletePermission'])
+    ->add(new PermissionsMiddleware('deletePermission'))
+    ->add(new CheckUserBlockedMiddleware());
+    
+// Suponiendo que usas un router tipo Slim o similar:
+$app->get('/profiles', [\App\Controllers\ProfilesListController::class, 'listAllProfiles'])
+    ->add(new PermissionsMiddleware('listAllProfiles'))
+    ->add(new CheckUserBlockedMiddleware());
+//--------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
+// Rutas protegidas con permisos:
+//--------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
 
 // Endpoints para User Profile
-$app->get('/user_profile', [\App\Controllers\UserProfileController::class, 'listProfiles'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+$app->get('/user_profile', [\App\Controllers\UserProfileController::class, 'myProfile']) 
+    ->add(new CheckUserBlockedMiddleware()); 
+$app->get('/user_profile/list', [\App\Controllers\UserProfileController::class, 'listProfiles'])
+    ->add(new PermissionsMiddleware('listUserProfiles'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/user_profile/{id}', [\App\Controllers\UserProfileController::class, 'getProfile'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getUserProfile'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/user_profile', [\App\Controllers\UserProfileController::class, 'addProfile'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addUserProfile'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/user_profile', [\App\Controllers\UserProfileController::class, 'updateProfile'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/user_profile', [\App\Controllers\UserProfileController::class, 'deleteProfile'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new CheckUserBlockedMiddleware());
 
 // Endpoints para User Configurations
-$app->get('/user_configurations', [\App\Controllers\UserConfigurationsController::class, 'listConfigurations'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+$app->get('/user_configurations', [\App\Controllers\UserConfigurationsController::class, 'myConfigurations'])
+    ->add(new CheckUserBlockedMiddleware());
+$app->get('/user_configurations/list', [\App\Controllers\UserConfigurationsController::class, 'listConfigurations'])
+    ->add(new PermissionsMiddleware('listUserConfigurations'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/user_configurations/{id}', [\App\Controllers\UserConfigurationsController::class, 'getConfiguration'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getUserConfigurations'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/user_configurations', [\App\Controllers\UserConfigurationsController::class, 'addConfiguration'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addUserConfigurations'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/user_configurations', [\App\Controllers\UserConfigurationsController::class, 'updateConfiguration'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/user_configurations', [\App\Controllers\UserConfigurationsController::class, 'deleteConfiguration'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
-
-
-
-
+    ->add(new CheckUserBlockedMiddleware());
 
 // Endpoints para Clients
 $app->get('/clients/{id}', [\App\Controllers\ClientsController::class, 'getClient'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getClient'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/clients', [\App\Controllers\ClientsController::class, 'addClient'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addClient'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/clients/{id}', [\App\Controllers\ClientsController::class, 'updateClient'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('updateClient'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/clients/{id}', [\App\Controllers\ClientsController::class, 'deleteClient'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
-// Endpoint para listar TODOS los clientes (sin filtro por user_id)
+    ->add(new PermissionsMiddleware('deleteClient'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/clients', [\App\Controllers\ClientsController::class, 'listClients'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
-    
-    
+    ->add(new PermissionsMiddleware('listClients'))
+    ->add(new CheckUserBlockedMiddleware());
 
 // Endpoints para Folders
 $app->get('/folders', [FoldersController::class, 'listFolders'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listFolders'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/folders/{id}', [FoldersController::class, 'getFolder'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getFolder'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/folders', [FoldersController::class, 'addFolder'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addFolder'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/folders/{id}', [FoldersController::class, 'updateFolder'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('updateFolder'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/folders/{id}', [FoldersController::class, 'deleteFolder'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
-// Endpoint para listar el historial de un folder
+    ->add(new PermissionsMiddleware('deleteFolder'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/folders/{id}/history', [FoldersController::class, 'listFolderHistory'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
-// Endpoint para listar folders de un cliente especÃ­fico
+    ->add(new PermissionsMiddleware('listFolderHistory'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/folders/client/{client_id}', [FoldersController::class, 'listFoldersByClient'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listFoldersByClient'))
+    ->add(new CheckUserBlockedMiddleware());
 
 use App\Controllers\CashBoxesController;
 
 // Endpoints para Cash Boxes
 $app->get('/cash_boxes', [CashBoxesController::class, 'listCashBoxes'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listCashBoxes'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/cash_boxes/{id}', [CashBoxesController::class, 'getCashBox'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getCashBox'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/cash_boxes', [CashBoxesController::class, 'addCashBox'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addCashBox'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/cash_boxes/{id}', [CashBoxesController::class, 'updateCashBox'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('updateCashBox'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/cash_boxes/{id}', [CashBoxesController::class, 'deleteCashBox'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('deleteCashBox'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/cash_boxes/{id}/history', [CashBoxesController::class, 'listCashBoxHistory'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listCashBoxHistory'))
+    ->add(new CheckUserBlockedMiddleware());
 
 use App\Controllers\SalesController;
 
 // Endpoints para Sales
 $app->get('/sales', [SalesController::class, 'listSales'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listSales'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/sales/{id}', [SalesController::class, 'getSale'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getSale'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/sales', [SalesController::class, 'addSale'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addSale'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/sales/{id}', [SalesController::class, 'updateSale'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('updateSale'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/sales/{id}', [SalesController::class, 'deleteSale'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('deleteSale'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/sales/{id}/history', [SalesController::class, 'listSaleHistory'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listSaleHistory'))
+    ->add(new CheckUserBlockedMiddleware());
 
 use App\Controllers\ProductsServicesController;
 
 $app->get('/products_services', [ProductsServicesController::class, 'listProductsServices'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listProductsServices'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/products_services/{id}', [ProductsServicesController::class, 'getProductService'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getProductService'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/products_services', [ProductsServicesController::class, 'addProductService'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addProductService'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/products_services/{id}', [ProductsServicesController::class, 'updateProductService'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('updateProductService'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/products_services/{id}', [ProductsServicesController::class, 'deleteProductService'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('deleteProductService'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/products_services/{id}/history', [ProductsServicesController::class, 'listProductServiceHistory'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listProductServiceHistory'))
+    ->add(new CheckUserBlockedMiddleware());
 
 use App\Controllers\JobsController;
 
 $app->get('/jobs', [JobsController::class, 'listJobs'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listJobs'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/jobs/{id}', [JobsController::class, 'getJob'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getJob'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/jobs', [JobsController::class, 'addJob'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addJob'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/jobs/{id}', [JobsController::class, 'updateJob'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('updateJob'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/jobs/{id}', [JobsController::class, 'deleteJob'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('deleteJob'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/jobs/{id}/history', [JobsController::class, 'listJobHistory'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listJobHistory'))
+    ->add(new CheckUserBlockedMiddleware());
 
 use App\Controllers\ExpensesController;
 
 $app->get('/expenses', [ExpensesController::class, 'listExpenses'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listExpenses'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/expenses/{id}', [ExpensesController::class, 'getExpense'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getExpense'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/expenses', [ExpensesController::class, 'addExpense'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addExpense'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/expenses/{id}', [ExpensesController::class, 'updateExpense'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('updateExpense'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/expenses/{id}', [ExpensesController::class, 'deleteExpense'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('deleteExpense'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/expenses/{id}/history', [ExpensesController::class, 'listExpenseHistory'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listExpenseHistory'))
+    ->add(new CheckUserBlockedMiddleware());
 
 use App\Controllers\AppointmentsController;
 
 $app->get('/appointments', [AppointmentsController::class, 'listAppointments'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listAppointments'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/appointments/{id}', [AppointmentsController::class, 'getAppointment'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getAppointment'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/appointments', [AppointmentsController::class, 'addAppointment'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addAppointment'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/appointments/{id}', [AppointmentsController::class, 'updateAppointment'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('updateAppointment'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/appointments/{id}', [AppointmentsController::class, 'deleteAppointment'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('deleteAppointment'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/appointments/{id}/history', [AppointmentsController::class, 'listAppointmentHistory'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listAppointmentHistory'))
+    ->add(new CheckUserBlockedMiddleware());
 
 use App\Controllers\AccountingClosingsController;
 
 $app->get('/accounting_closings', [AccountingClosingsController::class, 'listClosings'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('listClosings'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/accounting_closings/{id}', [AccountingClosingsController::class, 'getClosing'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('getClosing'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->post('/accounting_closings', [AccountingClosingsController::class, 'addClosing'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('addClosing'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->put('/accounting_closings/{id}', [AccountingClosingsController::class, 'updateClosing'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('updateClosing'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->delete('/accounting_closings/{id}', [AccountingClosingsController::class, 'deleteClosing'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
+    ->add(new PermissionsMiddleware('deleteClosing'))
+    ->add(new CheckUserBlockedMiddleware());
 $app->get('/accounting_closings/{id}/history', [AccountingClosingsController::class, 'listClosingHistory'])
-    ->add(new \App\Middleware\CheckUserBlockedMiddleware());
-
-
-
-
-
-
-
-
-
-
-
+    ->add(new PermissionsMiddleware('listClosingHistory'))
+    ->add(new CheckUserBlockedMiddleware());
 
 // Ruta por defecto para manejar "Not found"
 $app->any('/{routes:.+}', function (Request $request, Response $response) {
@@ -10758,8 +11260,5 @@ $app->any('/{routes:.+}', function (Request $request, Response $response) {
     $response->getBody()->write(json_encode($data));
     return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
 });
-
-
-
 
 ---

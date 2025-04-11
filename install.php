@@ -76,29 +76,37 @@ try {
         echo "Table 'users' already exists. Verification completed.<br/>";
     }
 
-
-
-
-// -------------------------------
-// 20. Table: permissions
-// -------------------------------
-$createPermissionsSql = "CREATE TABLE IF NOT EXISTS permissions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT DEFAULT NULL,
-    sector VARCHAR(100) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX (user_id),
-    INDEX (sector)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-executeSQL($pdo, $createPermissionsSql, "Table 'permissions' created/verified.");
-
-
-
-
-
-
-
+    // -------------------------------
+    // 20. Table: permissions
+    // -------------------------------
+    $createPermissionsSql = "CREATE TABLE IF NOT EXISTS permissions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT DEFAULT NULL,
+        sector VARCHAR(100) NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX (user_id),
+        INDEX (sector)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    executeSQL($pdo, $createPermissionsSql, "Table 'permissions' created/verified.");
+    
+    // -------------------------------
+    // 21. Table: permissions_history
+    // -------------------------------
+    $createPermissionsHistorySql = "CREATE TABLE IF NOT EXISTS permissions_history (
+        history_id INT AUTO_INCREMENT PRIMARY KEY,
+        permission_id INT NOT NULL,
+        user_id INT DEFAULT NULL,
+        sector VARCHAR(100) NOT NULL,
+        changed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        changed_by INT DEFAULT NULL,
+        operation_type ENUM('CREATION', 'UPDATE', 'DELETION') NOT NULL,
+        INDEX (permission_id),
+        INDEX (changed_by)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    executeSQL($pdo, $createPermissionsHistorySql, "Table 'permissions_history' created/verified.");
+    
+    
     // -------------------------------
     // 2. Table: files
     // -------------------------------

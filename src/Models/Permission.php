@@ -38,6 +38,14 @@ class Permission {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getById($id) {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     // Inserta un nuevo permiso
     public function create(array $data) {
         // Verificar si ya existe el permiso para ese usuario y sector
