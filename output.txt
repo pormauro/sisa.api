@@ -1655,29 +1655,37 @@ try {
         echo "Table 'users' already exists. Verification completed.<br/>";
     }
 
-
-
-
-// -------------------------------
-// 20. Table: permissions
-// -------------------------------
-$createPermissionsSql = "CREATE TABLE IF NOT EXISTS permissions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT DEFAULT NULL,
-    sector VARCHAR(100) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX (user_id),
-    INDEX (sector)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-executeSQL($pdo, $createPermissionsSql, "Table 'permissions' created/verified.");
-
-
-
-
-
-
-
+    // -------------------------------
+    // 20. Table: permissions
+    // -------------------------------
+    $createPermissionsSql = "CREATE TABLE IF NOT EXISTS permissions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT DEFAULT NULL,
+        sector VARCHAR(100) NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX (user_id),
+        INDEX (sector)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    executeSQL($pdo, $createPermissionsSql, "Table 'permissions' created/verified.");
+    
+    // -------------------------------
+    // 21. Table: permissions_history
+    // -------------------------------
+    $createPermissionsHistorySql = "CREATE TABLE IF NOT EXISTS permissions_history (
+        history_id INT AUTO_INCREMENT PRIMARY KEY,
+        permission_id INT NOT NULL,
+        user_id INT DEFAULT NULL,
+        sector VARCHAR(100) NOT NULL,
+        changed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        changed_by INT DEFAULT NULL,
+        operation_type ENUM('CREATION', 'UPDATE', 'DELETION') NOT NULL,
+        INDEX (permission_id),
+        INDEX (changed_by)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    executeSQL($pdo, $createPermissionsHistorySql, "Table 'permissions_history' created/verified.");
+    
+    
     // -------------------------------
     // 2. Table: files
     // -------------------------------
@@ -3873,29 +3881,37 @@ try {
         echo "Table 'users' already exists. Verification completed.<br/>";
     }
 
-
-
-
-// -------------------------------
-// 20. Table: permissions
-// -------------------------------
-$createPermissionsSql = "CREATE TABLE IF NOT EXISTS permissions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT DEFAULT NULL,
-    sector VARCHAR(100) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX (user_id),
-    INDEX (sector)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-executeSQL($pdo, $createPermissionsSql, "Table 'permissions' created/verified.");
-
-
-
-
-
-
-
+    // -------------------------------
+    // 20. Table: permissions
+    // -------------------------------
+    $createPermissionsSql = "CREATE TABLE IF NOT EXISTS permissions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT DEFAULT NULL,
+        sector VARCHAR(100) NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX (user_id),
+        INDEX (sector)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    executeSQL($pdo, $createPermissionsSql, "Table 'permissions' created/verified.");
+    
+    // -------------------------------
+    // 21. Table: permissions_history
+    // -------------------------------
+    $createPermissionsHistorySql = "CREATE TABLE IF NOT EXISTS permissions_history (
+        history_id INT AUTO_INCREMENT PRIMARY KEY,
+        permission_id INT NOT NULL,
+        user_id INT DEFAULT NULL,
+        sector VARCHAR(100) NOT NULL,
+        changed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        changed_by INT DEFAULT NULL,
+        operation_type ENUM('CREATION', 'UPDATE', 'DELETION') NOT NULL,
+        INDEX (permission_id),
+        INDEX (changed_by)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    executeSQL($pdo, $createPermissionsHistorySql, "Table 'permissions_history' created/verified.");
+    
+    
     // -------------------------------
     // 2. Table: files
     // -------------------------------
@@ -7165,7 +7181,8 @@ class PermissionsController {
         if (!$userId) {
             $result = ['error' => 'Falta el parÃ¡metro user_id'];
             $response->getBody()->write(json_encode($result));
-            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+            return $response->withStatus(400)
+                            ->withHeader('Content-Type', 'application/json');
         }
         $permissionModel = new Permission();
         $permissions = $permissionModel->listByUser($userId);
@@ -7173,63 +7190,109 @@ class PermissionsController {
         $response->getBody()->write(json_encode($result));
         return $response->withHeader('Content-Type', 'application/json');
     }
-    
-    // MÃ©todo para agregar un permiso (ya existente)
+            
     public function addPermission(Request $request, Response $response, array $args): Response {
         $data = json_decode($request->getBody()->getContents(), true);
         
         if (!isset($data['sector'])) {
             $result = ['error' => 'El campo sector es obligatorio'];
             $response->getBody()->write(json_encode($result));
-            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+            return $response->withStatus(400)
+                            ->withHeader('Content-Type', 'application/json');
         }
         
         $permissionModel = new Permission();
-    
-        // Se valida tanto para usuarios especÃ­ficos como para permisos globales (user_id null)
-        // Para evitar duplicados, se verifica si ya existe el permiso
-        // Nota: user_id puede venir como null o nÃºmero
-        $userId = $data['user_id'] ?? null;
-        if ($permissionModel->exists($userId, $data['sector'])) {
+        $assignedUserId = $data['user_id'] ?? null;
+        
+        // Verificar si ya existe el permiso para evitar duplicados
+        if ($permissionModel->exists($assignedUserId, $data['sector'])) {
             $result = ['error' => 'El permiso ya existe para este usuario'];
             $response->getBody()->write(json_encode($result));
-            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+            return $response->withStatus(400)
+                            ->withHeader('Content-Type', 'application/json');
         }
         
+        // Crear el permiso
         $insertId = $permissionModel->create($data);
+        
+        // Obtener el token desde el header y decodificarlo para extraer el id del usuario que realiza la acciÃ³n
+        $authHeader = $request->getHeaderLine('Authorization');
+        $token = str_replace('Bearer ', '', $authHeader);
+        $decoded = \App\Helpers\JwtHelper::verifyToken($token);
+        $tokenUserId = $decoded ? $decoded->id : null;
+        
         if ($insertId) {
+            // Registrar en historial la operaciÃ³n de creaciÃ³n con el id extraÃ­do del token
+            $permissionHistory = new \App\History\PermissionsHistory();
+            $permissionHistory->insertHistory(
+                $insertId,        // permissionId
+                $assignedUserId,  // userId (puede ser null para permisos globales)
+                $data['sector'],  // sector
+                $tokenUserId,     // changedBy (ID del usuario que hace la modificaciÃ³n)
+                'CREATION'        // operationType
+            );
+            
             $result = ['message' => 'Permiso creado exitosamente', 'permission_id' => $insertId];
             $response->getBody()->write(json_encode($result));
             return $response->withHeader('Content-Type', 'application/json');
         } else {
             $result = ['error' => 'Error al crear el permiso'];
             $response->getBody()->write(json_encode($result));
-            return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+            return $response->withStatus(500)
+                            ->withHeader('Content-Type', 'application/json');
         }
     }
-
-
-
-    // MÃ©todo para eliminar un permiso
+    
     public function deletePermission(Request $request, Response $response, array $args): Response {
         $id = $args['id'] ?? null;
         if (!$id) {
             $result = ['error' => 'Falta el ID del permiso'];
             $response->getBody()->write(json_encode($result));
-            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+            return $response->withStatus(400)
+                            ->withHeader('Content-Type', 'application/json');
         }
+        
         $permissionModel = new Permission();
+        
+        // Obtener detalles del permiso a eliminar
+        $permissionDetails = $permissionModel->getById($id);
+        if (!$permissionDetails) {
+            $result = ['error' => 'Permiso no encontrado'];
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(404)
+                            ->withHeader('Content-Type', 'application/json');
+        }
+        
+        // Proceder a eliminar el permiso
         $deleted = $permissionModel->delete($id);
         if ($deleted) {
+            // Extraer el id del usuario que realiza la acciÃ³n desde el token
+            $authHeader = $request->getHeaderLine('Authorization');
+            $token = str_replace('Bearer ', '', $authHeader);
+            $decoded = \App\Helpers\JwtHelper::verifyToken($token);
+            $tokenUserId = $decoded ? $decoded->id : null;
+            
+            // Registrar en historial la operaciÃ³n de eliminaciÃ³n
+            $permissionHistory = new \App\History\PermissionsHistory();
+            $permissionHistory->insertHistory(
+                $id,                              // permissionId
+                $permissionDetails['user_id'],    // userId del permiso (puede ser null para global)
+                $permissionDetails['sector'],     // sector
+                $tokenUserId,                     // changedBy (ID del usuario que hace la modificaciÃ³n)
+                'DELETION'                        // operationType
+            );
+            
             $result = ['message' => 'Permiso eliminado exitosamente'];
             $response->getBody()->write(json_encode($result));
             return $response->withHeader('Content-Type', 'application/json');
         } else {
             $result = ['error' => 'Error al eliminar el permiso'];
             $response->getBody()->write(json_encode($result));
-            return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+            return $response->withStatus(500)
+                            ->withHeader('Content-Type', 'application/json');
         }
     }
+
 }
 
 ---
@@ -8864,6 +8927,52 @@ class JobsHistory {
 
 ---
 Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
+File: PermissionsHistory.php
+Content:
+<?php
+namespace App\History;
+
+use App\Config\Database;
+use PDO;
+
+class PermissionsHistory {
+    private $conn;
+    private $table = 'permissions_history';
+
+    public function __construct() {
+        $db = new Database();
+        $this->conn = $db->connect();
+    }
+
+    /**
+     * Inserta un registro en el historial de permisos.
+     *
+     * @param int    $permissionId  ID del permiso afectado.
+     * @param int|null $userId      ID del usuario asociado al permiso (puede ser NULL).
+     * @param string $sector        Sector del permiso.
+     * @param int    $changedBy     ID del usuario que realizÃ³ la acciÃ³n.
+     * @param string $operationType Tipo de operaciÃ³n: 'CREATION', 'DELETION', etc.
+     */
+    public function insertHistory($permissionId, $userId, $sector, $changedBy, $operationType) {
+        $sql = "INSERT INTO {$this->table} 
+                (permission_id, user_id, sector, changed_by, operation_type)
+                VALUES (:permission_id, :user_id, :sector, :changed_by, :operation_type)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':permission_id', $permissionId, PDO::PARAM_INT);
+        if ($userId === null) {
+            $stmt->bindValue(':user_id', null, PDO::PARAM_NULL);
+        } else {
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        }
+        $stmt->bindParam(':sector', $sector);
+        $stmt->bindParam(':changed_by', $changedBy, PDO::PARAM_INT);
+        $stmt->bindParam(':operation_type', $operationType);
+        return $stmt->execute();
+    }
+}
+
+---
+Folder: C:/Users/Mauri/Documents/GitHub/sisa.api/sisa.api\src\History
 File: ProductsServicesHistory.php
 Content:
 <?php
@@ -10304,6 +10413,14 @@ class Permission {
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getById($id) {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // Inserta un nuevo permiso

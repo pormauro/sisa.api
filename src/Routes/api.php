@@ -6,7 +6,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Middleware\CheckUserBlockedMiddleware;
 use App\Middleware\PermissionsMiddleware;
 use App\Controllers\PermissionsController;
-use App\Controllers\FileController;
+use App\Controllers\FilesController;
 use App\Controllers\ProfileController;
 use App\Controllers\AuthController;
 use App\Controllers\FoldersController;
@@ -72,27 +72,31 @@ $app->get('/profile', function (Request $request, Response $response, $args) {
    // ->add(new PermissionsMiddleware('getProfile'))
     ->add(new CheckUserBlockedMiddleware());
 
-// Subir archivos (permiso: 'uploadFile')
-$app->post('/upload', function (Request $request, Response $response, $args) {
-    $controller = new FileController();
-    return $controller->upload($request, $response, $args);
-})
-   // ->add(new PermissionsMiddleware('uploadFile'))
-    ->add(new CheckUserBlockedMiddleware());
-
-// Descargar archivos (permiso: 'downloadFile')
-$app->get('/get_file', function (Request $request, Response $response, $args) {
-    $controller = new FileController();
-    return $controller->download($request, $response, $args);
-})
-    //->add(new PermissionsMiddleware('downloadFile'))
-    ->add(new CheckUserBlockedMiddleware());
-
 $app->get('/', function (Request $req, Response $res) {
     $res->getBody()->write(json_encode(['message' => 'Bienvenido a la API']));
     return $res->withHeader('Content-Type', 'application/json');
 });
 
+
+
+
+
+// Subir archivos (permiso: 'uploadFile')
+$app->post('/files', function (Request $request, Response $response, $args) {
+    $controller = new FilesController();
+    return $controller->upload($request, $response, $args);
+})
+    ->add(new PermissionsMiddleware('uploadFile'))
+    ->add(new CheckUserBlockedMiddleware());
+
+// Descargar archivos (permiso: 'downloadFile')
+// Ahora el file_id se obtiene desde la URL, conforme a la definición de la ruta
+$app->get('/files/{file_id}', function (Request $request, Response $response, $args) {
+    $controller = new FilesController();
+    return $controller->download($request, $response, $args);
+})
+    ->add(new PermissionsMiddleware('downloadFile'))
+    ->add(new CheckUserBlockedMiddleware());
 //--------------------------------------------------------------------------------------------------------------------
 //----------------------------------Super administrador user_id=1-----------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------
@@ -356,6 +360,30 @@ $app->delete('/accounting_closings/{id}', [AccountingClosingsController::class, 
 $app->get('/accounting_closings/{id}/history', [AccountingClosingsController::class, 'listClosingHistory'])
     ->add(new PermissionsMiddleware('listClosingHistory'))
     ->add(new CheckUserBlockedMiddleware());
+    
+    
+use App\Controllers\StatusController;
+
+$app->get('/statuses', [StatusController::class, 'listStatuses'])
+    ->add(new PermissionsMiddleware('listStatuses'))
+    ->add(new CheckUserBlockedMiddleware());
+$app->post('/statuses', [StatusController::class, 'addStatus'])
+    ->add(new PermissionsMiddleware('addStatus'))
+    ->add(new CheckUserBlockedMiddleware());
+$app->put('/statuses/reorder', [StatusController::class, 'reorderStatuses'])
+    ->add(new PermissionsMiddleware('reorderStatuses'))
+    ->add(new CheckUserBlockedMiddleware());
+$app->get('/statuses/{id:\d+}', [StatusController::class, 'getStatus'])
+    ->add(new PermissionsMiddleware('getStatus'))
+    ->add(new CheckUserBlockedMiddleware());
+$app->put('/statuses/{id:\d+}', [StatusController::class, 'updateStatus'])
+    ->add(new PermissionsMiddleware('updateStatus'))
+    ->add(new CheckUserBlockedMiddleware());
+$app->delete('/statuses/{id:\d+}', [StatusController::class, 'deleteStatus'])
+    ->add(new PermissionsMiddleware('deleteStatus'))
+    ->add(new CheckUserBlockedMiddleware());
+
+
 
 // Ruta por defecto para manejar "Not found"
 $app->any('/{routes:.+}', function (Request $request, Response $response) {

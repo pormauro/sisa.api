@@ -634,6 +634,49 @@ $createAccountingClosingsHistorySql = "CREATE TABLE IF NOT EXISTS accounting_clo
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 executeSQL($pdo, $createAccountingClosingsHistorySql, "Table 'accounting_closings_history' created/verified.");
 
+    // -------------------------------
+    // Table: statuses
+    // -------------------------------
+    $createStatusesSql = "CREATE TABLE IF NOT EXISTS statuses (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        label VARCHAR(100) NOT NULL,
+        value VARCHAR(100) NOT NULL,
+        background_color VARCHAR(7) NOT NULL,
+        order_index INT NOT NULL DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    executeSQL($pdo, $createStatusesSql, "Table 'statuses' created/verified.");
+
+    // Insertar valores iniciales en 'statuses' solo si la tabla está vacía
+    $stmt = $pdo->query("SELECT COUNT(*) FROM statuses");
+    $count = $stmt->fetchColumn();
+    if ($count == 0) {
+        $statuses = [
+            ["label" => "Pendiente",    "value" => "Pendiente",    "background_color" => "#9C27B0", "order_index" => 0],
+            ["label" => "En progreso",  "value" => "En progreso",  "background_color" => "#66BB6A", "order_index" => 1],
+            ["label" => "En espera",    "value" => "En espera",    "background_color" => "#FBC02D", "order_index" => 2],
+            ["label" => "En revisión",  "value" => "En revisión",  "background_color" => "#FFB74D", "order_index" => 3],
+            ["label" => "Aprobado",     "value" => "Aprobado",     "background_color" => "#26A69A", "order_index" => 4],
+            ["label" => "Completado",   "value" => "Completado",   "background_color" => "#42A5F5", "order_index" => 5],
+            ["label" => "Cancelado",    "value" => "Cancelado",    "background_color" => "#EF5350", "order_index" => 6],
+            ["label" => "Rechazado",    "value" => "Rechazado",    "background_color" => "#EC407A", "order_index" => 7]
+        ];
+        $insertSql = "INSERT INTO statuses (label, value, background_color, order_index) 
+                      VALUES (:label, :value, :background_color, :order_index)";
+        $stmtInsert = $pdo->prepare($insertSql);
+        foreach ($statuses as $status) {
+            $stmtInsert->execute([
+                ':label' => $status['label'],
+                ':value' => $status['value'],
+                ':background_color' => $status['background_color'],
+                ':order_index' => $status['order_index']
+            ]);
+        }
+        echo "Initial statuses inserted successfully.<br/>";
+    } else {
+        echo "Statuses already seeded.<br/>";
+    }
 
     echo "<br/>Installation/Update completed.";
 } catch (PDOException $e) {
