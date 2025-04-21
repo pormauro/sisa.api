@@ -16,8 +16,8 @@ class Jobs {
     // Crea un nuevo registro de job y retorna el ID insertado
     public function create(array $data) {
         $sql = "INSERT INTO {$this->table} 
-                (user_id, client_id, product_service_id, folder_id, type_of_work, description, status, start_datetime, end_datetime, multiplicative_value, attached_files)
-                VALUES (:user_id, :client_id, :product_service_id, :folder_id, :type_of_work, :description, :status, :start_datetime, :end_datetime, :multiplicative_value, :attached_files)";
+                (user_id, client_id, product_service_id, folder_id, type_of_work, description, status, schedule, multiplicative_value, attached_files)
+                VALUES (:user_id, :client_id, :product_service_id, :folder_id, :type_of_work, :description, :status, :schedule, :multiplicative_value, :attached_files)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':user_id', $data['user_id'], PDO::PARAM_INT);
         $stmt->bindParam(':client_id', $data['client_id'], PDO::PARAM_INT);
@@ -27,10 +27,8 @@ class Jobs {
         $stmt->bindParam(':type_of_work', $data['type_of_work']);
         $stmt->bindParam(':description', $data['description']);
         $stmt->bindParam(':status', $data['status']);
-        $startDatetime = isset($data['start_datetime']) ? $data['start_datetime'] : null;
-        $stmt->bindParam(':start_datetime', $startDatetime);
-        $endDatetime = isset($data['end_datetime']) ? $data['end_datetime'] : null;
-        $stmt->bindParam(':end_datetime', $endDatetime);
+        $startDatetime = isset($data['schedule']) ? $data['schedule'] : null;
+        $stmt->bindParam(':schedule', $startDatetime);
         $multiplicativeValue = isset($data['multiplicative_value']) ? $data['multiplicative_value'] : 1.00;
         $stmt->bindParam(':multiplicative_value', $multiplicativeValue);
         $attachedFiles = isset($data['attached_files']) ? $data['attached_files'] : null;
@@ -68,8 +66,7 @@ class Jobs {
                     type_of_work = :type_of_work,
                     description = :description,
                     status = :status,
-                    start_datetime = :start_datetime,
-                    end_datetime = :end_datetime,
+                    schedule = :schedule,
                     multiplicative_value = :multiplicative_value,
                     attached_files = :attached_files,
                     updated_at = CURRENT_TIMESTAMP
@@ -82,10 +79,8 @@ class Jobs {
         $stmt->bindParam(':type_of_work', $data['type_of_work']);
         $stmt->bindParam(':description', $data['description']);
         $stmt->bindParam(':status', $data['status']);
-        $startDatetime = isset($data['start_datetime']) ? $data['start_datetime'] : null;
-        $stmt->bindParam(':start_datetime', $startDatetime);
-        $endDatetime = isset($data['end_datetime']) ? $data['end_datetime'] : null;
-        $stmt->bindParam(':end_datetime', $endDatetime);
+        $startDatetime = isset($data['schedule']) ? $data['schedule'] : null;
+        $stmt->bindParam(':schedule', $startDatetime);
         $multiplicativeValue = isset($data['multiplicative_value']) ? $data['multiplicative_value'] : 1.00;
         $stmt->bindParam(':multiplicative_value', $multiplicativeValue);
         $attachedFiles = isset($data['attached_files']) ? $data['attached_files'] : null;

@@ -7,9 +7,9 @@ use App\Models\Files;
 use App\Helpers\JwtHelper;
 
 class FilesController {
-    // Allowed extensions and maximum file size (2 MB)
-    private $allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'];
-    private $maxFileSize = 2 * 1024 * 1024; // 2 MB
+    // Allowed extensions and maximum file size (100 MB)
+    private $allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx', 'mp4', 'mov', 'webm', 'mkv', 'avi', '3gp', '3g2', 'm4v'];
+    private $maxFileSize = 100 * 1024 * 1024; // 100 MB
 
     public function upload(Request $request, Response $response, array $args): Response {
         // Verificar que se reciba el header Authorization
@@ -76,64 +76,52 @@ class FilesController {
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
     }
-
-    public function download(Request $request, Response $response, array $args): Response {
-        // Verificar que se reciba el header Authorization
-        $auth = $request->getHeaderLine('Authorization');
-        if (!$auth) {
-            $data = ['error' => 'Authorization header missing'];
-            if (ob_get_contents()) { 
-                ob_clean(); 
-            }
-            $response->getBody()->write(json_encode($data));
-            return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
-        }
-        $token = str_replace('Bearer ', '', $auth);
-        $decoded = JwtHelper::verifyToken($token);
-        if (!$decoded) {
-            $data = ['error' => 'Invalid or expired token'];
-            if (ob_get_contents()) { 
-                ob_clean(); 
-            }
-            $response->getBody()->write(json_encode($data));
-            return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
-        }
-
-        // Obtener file_id desde los argumentos de la ruta (/files/{file_id})
-        if (!isset($args['file_id'])) {
-            $data = ['error' => 'Missing file_id'];
-            if (ob_get_contents()) { 
-                ob_clean(); 
-            }
-            $response->getBody()->write(json_encode($data));
-            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
-        }
-        $fileId = $args['file_id'];
-        $userId = $decoded->id;
-
-        // Obtener el archivo usando el modelo Files
-        $filesModel = new Files();
-        $file = $filesModel->getFile($fileId);
-
-        // Verificar que el archivo exista y que pertenezca al usuario autenticado
-        if (!$file || $file['user_id'] != $userId) {
-            $data = ['error' => 'File not found or access denied'];
-            if (ob_get_contents()) { 
-                ob_clean(); 
-            }
-            $response->getBody()->write(json_encode($data));
-            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }
-
-        // Limpiar el buffer de salida antes de enviar datos binarios
-        if (ob_get_contents()) { 
-            ob_clean(); 
-        }
-
-        // Establecer las cabeceras correspondientes y enviar el contenido del archivo para la descarga
-        $response = $response->withHeader('Content-Type', $file['file_type'])
-                             ->withHeader('Content-Disposition', 'attachment; filename="' . $file['original_name'] . '"');
-        $response->getBody()->write($file['file_data']);
-        return $response;
+public function download(Request $request, Response $response, array $args): Response {
+    $auth = $request->getHeaderLine('Authorization');
+    if (!$auth) {
+        return $response->withStatus(401)->withHeader('Content-Type', 'application/json')
+                        ->withBody($this->toJson(['error' => 'Authorization header missing']));
     }
+
+    $token = str_replace('Bearer ', '', $auth);
+    $decoded = JwtHelper::verifyToken($token);
+    if (!$decoded) {
+        return $response->withStatus(401)->withHeader('Content-Type', 'application/json')
+                        ->withBody($this->toJson(['error' => 'Invalid or expired token']));
+    }
+
+    if (!isset($args['file_id'])) {
+        return $response->withStatus(400)->withHeader('Content-Type', 'application/json')
+                        ->withBody($this->toJson(['error' => 'Missing file_id']));
+    }
+
+    $fileId = $args['file_id'];
+    $userId = $decoded->id;
+
+    $filesModel = new Files();
+    $file = $filesModel->getFile($fileId);
+/*
+    if (!$file || $file['user_id'] != $userId) {
+        return $response->withStatus(404)->withHeader('Content-Type', 'application/json')
+                        ->withBody($this->toJson(['error' => 'File not found or access denied']));
+    }*/
+
+    // Codificar el binario como base64 y devolverlo junto con la metadata
+    $base64Content = base64_encode($file['file_data']);
+    unset($file['file_data']);
+
+    $response->getBody()->write(json_encode([
+        'file' => $file,
+        'content' => $base64Content
+    ]));
+    return $response->withHeader('Content-Type', 'application/json');
+}
+
+private function toJson(array $data): \Slim\Psr7\Stream {
+    $stream = fopen('php://temp', 'r+');
+    fwrite($stream, json_encode($data));
+    rewind($stream);
+    return new \Slim\Psr7\Stream($stream);
+}
+
 }

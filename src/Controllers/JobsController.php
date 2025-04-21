@@ -99,11 +99,10 @@ class JobsController {
                             ->withHeader('Content-Type','application/json');
         }*/
         $body['user_id'] = $userId;
-        // Opcionales: product_service_id, folder_id, start_datetime, end_datetime, multiplicative_value, attached_files
+        // Opcionales: product_service_id, folder_id, schedule, multiplicative_value, attached_files
         $body['product_service_id'] = $body['product_service_id'] ?? null;
         $body['folder_id'] = $body['folder_id'] ?? null;
-        $body['start_datetime'] = $body['start_datetime'] ?? null;
-        $body['end_datetime'] = $body['end_datetime'] ?? null;
+        $body['schedule'] = $body['schedule'] ?? null;
         $body['multiplicative_value'] = $body['multiplicative_value'] ?? 1.00;
         $body['attached_files'] = $body['attached_files'] ?? null;
         
@@ -127,8 +126,7 @@ class JobsController {
             $body['type_of_work'],
             $body['description'],
             $body['status'],
-            $body['start_datetime'],
-            $body['end_datetime'],
+            $body['schedule'],
             $body['multiplicative_value'],
             $body['attached_files'],
             $userId,
@@ -182,8 +180,7 @@ class JobsController {
         }
         $body['product_service_id'] = $body['product_service_id'] ?? null;
         $body['folder_id'] = $body['folder_id'] ?? null;
-        $body['start_datetime'] = $body['start_datetime'] ?? null;
-        $body['end_datetime'] = $body['end_datetime'] ?? null;
+        $body['schedule'] = $body['schedule'] ?? null;
         $body['multiplicative_value'] = $body['multiplicative_value'] ?? 1.00;
         $body['attached_files'] = $body['attached_files'] ?? null;
         
@@ -205,8 +202,7 @@ class JobsController {
             $body['type_of_work'],
             $body['description'],
             $body['status'],
-            $body['start_datetime'],
-            $body['end_datetime'],
+            $body['schedule'],
             $body['multiplicative_value'],
             $body['attached_files'],
             $userId,
@@ -261,8 +257,7 @@ class JobsController {
             $existingJob['type_of_work'],
             $existingJob['description'],
             $existingJob['status'],
-            $existingJob['start_datetime'],
-            $existingJob['end_datetime'],
+            $existingJob['schedule'],
             $existingJob['multiplicative_value'],
             $existingJob['attached_files'],
             $userId,

@@ -25,17 +25,16 @@ class JobsHistory {
      * - type_of_work: Tipo de trabajo.
      * - description: Descripción del job.
      * - status: Estado del job.
-     * - start_datetime: Fecha y hora de inicio (puede ser NULL).
-     * - end_datetime: Fecha y hora de finalización (puede ser NULL).
+     * - schedule: Fecha y hora de inicio (puede ser NULL).
      * - multiplicative_value: Valor multiplicador (por defecto 1.00).
      * - attached_files: Archivos adjuntos (opcional).
      * - changed_by: ID del usuario que realizó la operación.
      * - operation_type: 'CREATION', 'UPDATE' o 'DELETION'.
      */
-    public function insertHistory($job_id, $user_id, $client_id, $product_service_id, $folder_id, $type_of_work, $description, $status, $start_datetime, $end_datetime, $multiplicative_value, $attached_files, $changed_by, $operation_type) {
+    public function insertHistory($job_id, $user_id, $client_id, $product_service_id, $folder_id, $type_of_work, $description, $status, $schedule, $multiplicative_value, $attached_files, $changed_by, $operation_type) {
         $sql = "INSERT INTO {$this->table}
-                (job_id, user_id, client_id, product_service_id, folder_id, type_of_work, description, status, start_datetime, end_datetime, multiplicative_value, attached_files, changed_by, operation_type)
-                VALUES (:job_id, :user_id, :client_id, :product_service_id, :folder_id, :type_of_work, :description, :status, :start_datetime, :end_datetime, :multiplicative_value, :attached_files, :changed_by, :operation_type)";
+                (job_id, user_id, client_id, product_service_id, folder_id, type_of_work, description, status, schedule, multiplicative_value, attached_files, changed_by, operation_type)
+                VALUES (:job_id, :user_id, :client_id, :product_service_id, :folder_id, :type_of_work, :description, :status, :schedule, :multiplicative_value, :attached_files, :changed_by, :operation_type)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':job_id', $job_id, PDO::PARAM_INT);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -46,8 +45,7 @@ class JobsHistory {
         $stmt->bindParam(':type_of_work', $type_of_work);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':status', $status);
-        $stmt->bindParam(':start_datetime', $start_datetime);
-        $stmt->bindParam(':end_datetime', $end_datetime);
+        $stmt->bindParam(':schedule', $schedule);
         $stmt->bindParam(':multiplicative_value', $multiplicative_value);
         $attached_files = isset($attached_files) ? $attached_files : null;
         $stmt->bindParam(':attached_files', $attached_files);
