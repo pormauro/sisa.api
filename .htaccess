@@ -1,25 +1,35 @@
-# Activar reescritura de URLs
+# Activar el motor de reescritura de URLs
 <IfModule mod_rewrite.c>
-    RewriteEngine On
+  RewriteEngine On
 
-    # Proteger el archivo .env para que no se pueda acceder directamente
-    <FilesMatch "^\.env">
-        Order allow,deny
-        Deny from all
-    </FilesMatch>
+  # Forzar el uso de HTTPS para mayor seguridad
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # Si el archivo o directorio solicitado no existe, redirigir a index.php
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^.*$ index.php [QSA,L]
+  # Proteger archivos sensibles para que no sean accesibles desde el navegador
+  <FilesMatch "^\.env|composer\.lock|package\.json|package-lock\.json$">
+      Order allow,deny
+      Deny from all
+  </FilesMatch>
 
-    php_flag display_errors on
-    php_value error_reporting -1
+  # Redirigir todas las solicitudes que no correspondan a un archivo o directorio existente
+  # al punto de entrada de la aplicación (index.php) para que Slim las maneje.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.php [QSA,L]
 </IfModule>
 
+# Opciones adicionales de cabeceras de seguridad
 <IfModule mod_headers.c>
-    # Cabeceras de seguridad básicas
+    # Previene que el sitio sea cargado en un iframe (protección contra clickjacking)
     Header always set X-Frame-Options "SAMEORIGIN"
+    # Evita que el navegador intente adivinar el tipo de contenido (MIME type sniffing)
     Header always set X-Content-Type-Options "nosniff"
+    # Activa la protección contra XSS en navegadores compatibles
     Header always set X-XSS-Protection "1; mode=block"
+    # Controla qué información de "referrer" se incluye con las solicitudes
+    Header set Referrer-Policy "no-referrer-when-downgrade"
 </IfModule>
+
+# Oculta la firma del servidor (versión de Apache/PHP) para no dar pistas a atacantes
+ServerSignature Off

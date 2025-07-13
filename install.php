@@ -115,15 +115,15 @@ try {
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
         original_name VARCHAR(255) NOT NULL,
+        stored_name VARCHAR(255) NOT NULL UNIQUE, -- Nombre único generado para el archivo
+        file_path VARCHAR(512) NOT NULL,         -- Ruta donde se almacena en el servidor
         file_type VARCHAR(100) NOT NULL,
         file_size INT NOT NULL,
-        file_data LONGBLOB NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         INDEX (user_id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     executeSQL($pdo, $createFilesSql, "Table 'files' created/verified.");
-
     // -------------------------------
     // 3. Table: activity_log
     // -------------------------------
@@ -359,13 +359,13 @@ try {
     $createJobsSql = "CREATE TABLE IF NOT EXISTS jobs (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
-        client_id DEFAULT NULL,
+        client_id INT DEFAULT NULL,
         product_service_id INT DEFAULT NULL,
         folder_id INT DEFAULT NULL,
         type_of_work VARCHAR(100) DEFAULT NULL,
         description TEXT DEFAULT NULL,
         status VARCHAR(50) DEFAULT NULL,
-        schedule TEXT DEFAULT NULL,
+        schedule TEXT DEFAULT NULL, // Campo unificado
         multiplicative_value DECIMAL(10,2) DEFAULT 1.00,
         attached_files TEXT DEFAULT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -375,8 +375,6 @@ try {
         FOREIGN KEY (product_service_id) REFERENCES products_services(id) ON DELETE SET NULL,
         FOREIGN KEY (folder_id) REFERENCES folders(id) ON DELETE SET NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-    executeSQL($pdo, $createJobsSql, "Table 'jobs' created/verified.");
-    
     // -------------------------------
     // Table: jobs_history
     // -------------------------------

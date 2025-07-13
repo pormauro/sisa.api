@@ -13,16 +13,19 @@ class Files {
         $this->conn = $db->connect();
     }
 
-    // Inserta un archivo en la base de datos y devuelve el ID insertado
-    public function upload($userId, $originalName, $fileType, $fileSize, $fileData) {
-        $sql = "INSERT INTO {$this->table} (user_id, original_name, file_type, file_size, file_data) 
-                VALUES (:user_id, :original_name, :file_type, :file_size, :file_data)";
+    public function upload($userId, $originalName, $storedName, $fileType, $fileSize, $filePath, $storagePath) {
+        $sql = "INSERT INTO {$this->table} (user_id, original_name, stored_name, file_type, file_size, file_path, storage_path) 
+                VALUES (:user_id, :original_name, :stored_name, :file_type, :file_size, :file_path, :storage_path)";
+        
         $stmt = $this->conn->prepare($sql);
+        
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->bindParam(':original_name', $originalName);
+        $stmt->bindParam(':stored_name', $storedName);
         $stmt->bindParam(':file_type', $fileType);
         $stmt->bindParam(':file_size', $fileSize, PDO::PARAM_INT);
-        $stmt->bindParam(':file_data', $fileData, PDO::PARAM_LOB);
+        $stmt->bindParam(':file_path', $filePath); 
+        $stmt->bindParam(':storage_path', $storagePath);
 
         if($stmt->execute()){
             return $this->conn->lastInsertId();
@@ -30,9 +33,8 @@ class Files {
         return false;
     }
 
-    // Obtiene la información del archivo almacenado (incluyendo el archivo binario)
     public function getFile($fileId) {
-        $sql = "SELECT id, user_id, original_name, file_type, file_size, file_data
+        $sql = "SELECT id, user_id, original_name, stored_name, file_type, file_size, file_path, storage_path
                 FROM {$this->table} 
                 WHERE id = :file_id";
         $stmt = $this->conn->prepare($sql);
@@ -41,4 +43,3 @@ class Files {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
-?>
